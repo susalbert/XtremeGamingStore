@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - XtremeGaming</title>
+    <link rel="icon" href="media/icono.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        body.modal-abierto {
+            overflow: hidden;
+        }
+        
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.7em; }
+        h3 { font-size: 2em; }
+        p { font-size: 1.25em; }
+        
+        button {
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.5);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            color: white;
+            background-color: orangered;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        button:hover {
+            background-color: rgba(255, 72, 0, 0.8);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: rgb(245,245,245);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        header .logo {
+            margin: 0;
+            padding: 25px 30px;
+            font-weight: bold;
+            color: orangered;
+            font-size: 1.6em;
+        }
+        
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header nav {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding-bottom: 25px;
+        }
+        
+        header a {
+            padding: 5px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        header a:hover {
+            color: orangered;
+        }
+
+        #perfil-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            height: 40vh;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url(media/room-with-lot-games-video-game-wall_875765-5370.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            padding-top: 100px;
+            margin-top: 80px;
+        }
+        
+        #perfil-hero h1 {
+            color: white;
+            margin-bottom: 20px;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        #perfil-hero p {
+            color: white;
+            font-size: 1.5em;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        #perfil-contenido {
+            padding: 100px 12px;
+            background-color: white;
+        }
+        
+        #perfil-contenido h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .perfil-card {
+            background-color: #f5f5f5;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            border-radius: 10px;
+            border-left: 4px solid orangered;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: orangered;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .estadisticas {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            align-items: center;
+        }
+        
+        .estadistica {
+            text-align: center;
+            position: relative;
+        }
+        
+        .numero {
+            font-size: 2em;
+            font-weight: bold;
+            color: orangered;
+            display: block;
+        }
+        
+        .label {
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .info-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #ff9800;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            margin-left: 5px;
+            padding: 0;
+            line-height: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+        
+        .info-btn:hover {
+            background-color: #e68900;
+            transform: scale(1.1);
+        }
+        
+        .modal-puntos {
+            max-width: 450px;
+        }
+        
+        .modal-puntos h3 {
+            color: #ff9800;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-puntos ul {
+            padding-left: 20px;
+        }
+        
+        .modal-puntos li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .modal-puntos .puntos-destacado {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
+        }
+
+        .configuracion-card {
+            background-color: #f5f5f5;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .configuracion-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .config-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 25px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 160px;
+        }
+        
+        .config-btn:hover {
+            border-color: #4CAF50;
+            transform: translateY(-2px);
+        }
+        
+        .config-btn.pass-btn:hover { border-color: #ff9800; }
+        .config-btn.email-btn:hover { border-color: #2196F3; }
+        .config-btn.name-btn:hover { border-color: #9C27B0; }
+        
+        .config-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .config-text {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .config-desc {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .cerrar-sesion-container {
+            text-align: center;
+            margin: 40px auto;
+            max-width: 800px;
+        }
+        
+        .cerrar-sesion-btn {
+            background-color: #dc3545;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border: none;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .cerrar-sesion-btn:hover {
+            background-color: #c82333;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(220, 53, 69, 0.4);
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .modal input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .modal-btn.cancel {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .modal-btn.confirm {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .modal-btn.danger {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .juegos-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .juego-card {
+            width: 250px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .juego-card h3 {
+            margin: 0 0 10px 0;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        .juego-card p {
+            color: #666;
+            margin: 5px 0;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .historial-item {
+            background-color: white;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid orangered;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .historial-item > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            margin-right: 20px;
+        }
+        
+        .historial-item h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        
+        .fecha {
+            color: #666;
+            font-size: 0.9em;
+            white-space: nowrap;
+            margin-left: 20px;
+        }
+        
+        .precio {
+            color: orangered;
+            font-weight: bold;
+            font-size: 1.1em;
+            white-space: nowrap;
+        }
+
+        footer {
+            background-color: rgb(230,230,230);
+            padding: 12px 0;
+        }
+        
+        footer p {
+            margin: 0;
+            padding: 12px;
+            color: rgb(100,100,100);
+            text-align: center;
+        }
+        
+        footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        @media (min-width: 720px) {
+            header .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            header nav {
+                flex-direction: row;
+                padding-bottom: 0;
+                padding-right: 20px;
+            }
+            
+            #perfil-hero h1 {
+                font-size: 4em;
+            }
+            
+            #perfil-hero {
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .estadisticas {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .historial-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .historial-item > div {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .fecha {
+                margin-left: 0;
+            }
+            
+            .configuracion-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .config-btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+        
+        body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
+            font-family: 'Fredoka', sans-serif !important;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <p class="logo">XtremeGaming</p>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#VideojuegosMas">Videojuegos</a>
+            <a href="tarjetas.html">Tarjetas Regalo</a>
+            <a href="dispositivos.html">Dispositivos</a>
+            <a href="dlc.html">DLC</a>
+            <a href="index.html#caracteristicas">Sobre Nosotros</a>
+            <a href="perfil.html" style="color: orangered;">Perfil</a>
+            <a href="ajustes.html">Ajustes</a>
+            <a href="carrito.html">Carrito</a>
+            <a href="sugerencias.html">Sugerencias</a>
+            <a href="actualizaciones.html">Registro de cambios</a>
+        </nav>
+    </div>
+</header>
+
+<section id="perfil-hero">
+    <h1>Mi Perfil</h1>
+    <p>Bienvenido a tu espacio personal</p>
+</section>
+
+<section id="perfil-contenido">
+    <div class="container">
+        <div class="perfil-card">
+            <div class="avatar">E</div>
+            <h2 id="nombre-usuario">Ejemplo</h2>
+            <p id="email-usuario">ejemplo@email.com</p>
+            <p>Miembro desde: Enero 2023</p>
+            
+            <div class="estadisticas">
+                <div class="estadistica">
+                    <span class="numero">8</span>
+                    <span class="label">Compras</span>
+                </div>
+                <div class="estadistica">
+                    <span class="numero">4</span>
+                    <span class="label">Juegos</span>
+                </div>
+                <div class="estadistica">
+                    <span class="numero" id="puntos-usuario">⭐1,250⭐</span>
+                    <span class="label">
+                        Puntos Xtreme
+                        <button class="info-btn" onclick="abrirModalPuntos()">?</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal-puntos" class="modal-overlay" onclick="cerrarModalPuntos(event)">
+            <div class="modal modal-puntos" onclick="event.stopPropagation()">
+                <h3>
+                    <span>⭐</span>
+                    ¿Qué son los Puntos Xtreme?
+                </h3>
+                
+                <div class="puntos-destacado">
+                    <p style="margin: 0; font-weight: bold; color: #ff9800;">Tus puntos actuales: <span id="modal-puntos-cantidad">1,250</span></p>
+                </div>
+                
+                <ul>
+                    <li><strong>Gana puntos:</strong> Por cada compra recibes puntos equivalentes al 10% del total (ej: $100 = 1,000 puntos).</li>
+                    <li><strong>Canjea tus puntos:</strong> 100 puntos = $1 de descuento en una de tus futuras compras.</li>
+                    <li><strong>Máximo por compra:</strong> Puedes canjear hasta 1,000 puntos ($10) en una sola compra.</li>
+                    <li><strong>Solo múltiplos de 100:</strong> Debes canjear puntos de 100 en 100 (100, 200, 300...).</li>
+                    <li><strong>Participa en sorteos:</strong> Usa 50 puntos para participar en cada uno de nuestros sorteos diarios.</li>
+                    <li><strong>Los puntos no caducan:</strong> Acumula todos los que quieras y úsalos cuando mejor te convenga.</li>
+                </ul>
+                
+                <p style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-bottom: 0;">
+                    💡 <strong>Consejo:</strong> Cuanto más compras, más puntos acumulas. ¡Revisa los sorteos diarios en la seccion de Videojuegos para ganar premios increíbles!
+                </p>
+                
+                <div class="modal-buttons">
+                    <button class="modal-btn confirm" onclick="cerrarModalPuntos()">Entendido</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="configuracion-card">
+            <h2 style="text-align: center; margin-top: 0;">Configuración de Cuenta</h2>
+            
+            <div class="configuracion-grid">
+                <div class="config-btn pass-btn" onclick="abrirModal('pass')">
+                    <span class="config-icon">🔒</span>
+                    <span class="config-text">Cambiar Contraseña</span>
+                    <span class="config-desc">Recibirás un email de verificación</span>
+                </div>
+                
+                <div class="config-btn email-btn" onclick="abrirModal('email')">
+                    <span class="config-icon">📧</span>
+                    <span class="config-text">Cambiar Email</span>
+                    <span class="config-desc">Introduce tu nuevo email</span>
+                </div>
+                
+                <div class="config-btn name-btn" onclick="abrirModal('name')">
+                    <span class="config-icon">👤</span>
+                    <span class="config-text">Cambiar Nombre</span>
+                    <span class="config-desc">Recibirás un email de verificación</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal-pass" class="modal-overlay">
+            <div class="modal">
+                <h3>Cambiar Contraseña</h3>
+                <p>Se enviará un email de verificación a <strong id="email-actual-pass">ejemplo@email.com</strong></p>
+                <p style="font-size: 0.9em; color: #666;">Haz clic en el enlace del email para continuar con el cambio de contraseña.</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel" onclick="cerrarModal('pass')">Cancelar</button>
+                    <button class="modal-btn confirm" onclick="enviarVerificacion('pass')">Enviar verificación</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal-email" class="modal-overlay">
+            <div class="modal">
+                <h3>Cambiar Email</h3>
+                <p>Email actual: <strong id="email-actual-email">ejemplo@email.com</strong></p>
+                <input type="email" id="nuevo-email" placeholder="Nuevo email">
+                <p style="font-size: 0.9em; color: #666;">Te enviaremos un código de verificación a este nuevo email.</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel" onclick="cerrarModal('email')">Cancelar</button>
+                    <button class="modal-btn confirm" onclick="enviarVerificacion('email')">Enviar verificación</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal-name" class="modal-overlay">
+            <div class="modal">
+                <h3>Cambiar Nombre</h3>
+                <p>Nombre actual: <strong id="nombre-actual">Ejemplo</strong></p>
+                <p>Se enviará un email de verificación a <strong id="email-actual-name">ejemplo@email.com</strong></p>
+                <p style="font-size: 0.9em; color: #666;">Haz clic en el enlace del email para confirmar el cambio de nombre.</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel" onclick="cerrarModal('name')">Cancelar</button>
+                    <button class="modal-btn confirm" onclick="enviarVerificacion('name')">Enviar verificación</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MODAL DE CONFIRMACIÓN DE CIERRE DE SESIÓN -->
+        <div id="modal-cerrar" class="modal-overlay" onclick="cerrarModalCerrar(event)">
+            <div class="modal" onclick="event.stopPropagation()">
+                <h3>🔒 Cerrar Sesión</h3>
+                <p>¿Estás seguro de que quieres cerrar sesión?</p>
+                <p style="font-size: 0.9em; color: #666;">Tendrás que volver a iniciar sesión para acceder a tu perfil.</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel" onclick="cerrarModalCerrar()">Cancelar</button>
+                    <button class="modal-btn danger" onclick="cerrarSesion()">Sí, cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+        
+        <h2>Mis Juegos</h2>
+        <div class="juegos-grid">
+            <div class="juego-card">
+                <h3>Super Mario Odyssey</h3>
+                <p>Platformer 3D</p>
+                <p>Comprado: 15/03/2023</p>
+                <button onclick="alert('Iniciando juego: Super Mario Odyssey')">Jugar</button>
+            </div>
+            
+            <div class="juego-card">
+                <h3>Battlefield 6 - Phantom Edition</h3>
+                <p>FPS</p>
+                <p>Comprado: 10/02/2024</p>
+                <button onclick="alert('Iniciando juego: Battlefield 6 - Phantom Edition')">Jugar</button>
+            </div>
+            
+            <div class="juego-card">
+                <h3>Undertale</h3>
+                <p>RPG</p>
+                <p>Comprado: 05/01/2025</p>
+                <button onclick="alert('Iniciando juego: Undertale')">Jugar</button>
+            </div>
+        </div>
+        
+        <h2>Historial de Compras</h2>
+        <div class="perfil-card" style="padding: 20px;">
+            <div class="historial-item">
+                <div>
+                    <h3>The Legend of Zelda: Tears of the Kingdom</h3>
+                    <span class="fecha">15 de Marzo, 2023</span>
+                </div>
+                <span class="precio">$59.99</span>
+            </div>
+            
+            <div class="historial-item">
+                <div>
+                    <h3>Tarjeta de Regalo Nintendo eShop $50</h3>
+                    <span class="fecha">10 de Febrero, 2024</span>
+                </div>
+                <span class="precio">$50.00</span>
+            </div>
+            
+            <div class="historial-item">
+                <div>
+                    <h3>Battlefield 6 - Phantom Edition</h3>
+                    <span class="fecha">5 de Enero, 2025</span>
+                </div>
+                <span class="precio">$89.99</span>
+            </div>
+        </div>
+        
+        <div class="cerrar-sesion-container">
+            <button class="cerrar-sesion-btn" onclick="abrirModalCerrar()">
+                🔒 CERRAR SESIÓN
+            </button>
+        </div>
+        
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; XtremeGaming 2026 - Mi Perfil</p>
+    </div>
+</footer>
+
+<script>
+    function abrirModalPuntos() {
+        const puntosUsuario = document.getElementById('puntos-usuario').textContent;
+        document.getElementById('modal-puntos-cantidad').textContent = puntosUsuario.replace(/[^0-9,]/g, '');
+        
+        document.getElementById('modal-puntos').style.display = 'flex';
+        document.body.classList.add('modal-abierto');
+    }
+    
+    function cerrarModalPuntos(event) {
+        if (!event || event.target === document.getElementById('modal-puntos')) {
+            document.getElementById('modal-puntos').style.display = 'none';
+            document.body.classList.remove('modal-abierto');
+        }
+    }
+    
+    function abrirModal(tipo) {
+        document.getElementById(`modal-${tipo}`).style.display = 'flex';
+        document.body.classList.add('modal-abierto');
+    }
+    
+    function cerrarModal(tipo) {
+        document.getElementById(`modal-${tipo}`).style.display = 'none';
+        document.body.classList.remove('modal-abierto');
+        if (tipo === 'email') {
+            document.getElementById('nuevo-email').value = '';
+        }
+    }
+    
+    function abrirModalCerrar() {
+        document.getElementById('modal-cerrar').style.display = 'flex';
+        document.body.classList.add('modal-abierto');
+    }
+    
+    function cerrarModalCerrar(event) {
+        if (!event || event.target === document.getElementById('modal-cerrar')) {
+            document.getElementById('modal-cerrar').style.display = 'none';
+            document.body.classList.remove('modal-abierto');
+        }
+    }
+    
+    function cerrarSesion() {
+        alert('✅ Has cerrado sesión correctamente.\nSerás redirigido a la página de inicio.');
+        
+        window.location.href = 'index.html';
+    }
+    
+    function enviarVerificacion(tipo) {
+        const emailActual = 'ejemplo@email.com';
+        const nombreActual = 'Ejemplo';
+        
+        if (tipo === 'email') {
+            const nuevoEmail = document.getElementById('nuevo-email').value.trim();
+            
+            if (!nuevoEmail) {
+                alert('❌ Por favor, ingresa un nuevo email');
+                return;
+            }
+            
+            if (!nuevoEmail.includes('@') || !nuevoEmail.includes('.')) {
+                alert('❌ Por favor, ingresa un email válido');
+                return;
+            }
+            
+            alert(`✅ Se ha enviado un código de verificación a ${nuevoEmail}\nPor favor, revisa tu bandeja de entrada.`);
+            document.getElementById('email-usuario').textContent = nuevoEmail;
+            document.getElementById('email-actual-email').textContent = nuevoEmail;
+            document.getElementById('email-actual-pass').textContent = nuevoEmail;
+            document.getElementById('email-actual-name').textContent = nuevoEmail;
+            
+        } else if (tipo === 'pass') {
+            alert(`✅ Se ha enviado un email de verificación a ${emailActual}\nHaz clic en el enlace para cambiar tu contraseña.`);
+            
+        } else if (tipo === 'name') {
+            alert(`✅ Se ha enviado un email de verificación a ${emailActual}\nHaz clic en el enlace para confirmar el cambio de nombre.`);
+        }
+        
+        cerrarModal(tipo);
+    }
+    
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal-overlay') && 
+            event.target.id !== 'modal-puntos' && 
+            event.target.id !== 'modal-cerrar') {
+            event.target.style.display = 'none';
+            document.body.classList.remove('modal-abierto');
+            if (event.target.id === 'modal-email') {
+                document.getElementById('nuevo-email').value = '';
+            }
+        }
+    };
+</script>
+
+</body>
+</html>

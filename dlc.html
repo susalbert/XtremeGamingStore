@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DLC - XtremeGaming</title>
+    <link rel="icon" href="media/icono.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.7em; }
+        h3 { font-size: 2em; }
+        p { font-size: 1.25em; }
+        
+        button {
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.5);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            color: white;
+            background-color: orangered;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        button:hover {
+            background-color: rgba(255, 72, 0, 0.8);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: rgb(245,245,245);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        header .logo {
+            margin: 0;
+            padding: 25px 30px;
+            font-weight: bold;
+            color: orangered;
+            font-size: 1.6em;
+        }
+        
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header nav {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding-bottom: 25px;
+        }
+        
+        header a {
+            padding: 5px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+        }
+        
+        header a:hover {
+            color: orangered;
+        }
+
+        #dlc-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            height: 40vh;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url(media/room-with-lot-games-video-game-wall_875765-5370.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            padding-top: 100px;
+            margin-top: 80px;
+        }
+        
+        #dlc-hero h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        #dlc-hero p {
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 30px;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            display: flex;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        .search-box button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        .search-box button:hover {
+            background-color: #45a049;
+        }
+
+        .filtros-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .filtro-titulo {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap;
+        }
+        
+        .filtros-plataforma {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filtro-btn {
+            padding: 10px 20px;
+            background-color: orangered;
+            border: 2px solid orangered;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            font-family: 'Fredoka', sans-serif !important;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .filtro-btn:hover {
+            background-color: #ff6600;
+            border-color: #e65c00;
+        }
+        
+        .filtro-btn.active {
+            background-color: #cc5200;
+            border-color: #cc5200;
+            box-shadow: 0 4px 8px rgba(204, 82, 0, 0.3);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            font-style: italic;
+            color: #666;
+            display: none;
+        }
+        
+        .no-results.show {
+            display: block;
+        }
+        
+        .dlc-hidden {
+            display: none !important;
+        }
+
+        .plataforma-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: #666;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 5px;
+            font-weight: bold;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        .nintendo-badge { background-color: #e60012; }
+        .playstation-badge { background-color: #0066cc; }
+        .xbox-badge { background-color: #107c10; }
+        .steam-badge { background-color: #0082d8; }
+        .epic-badge { background-color: #000000; }
+        .pc-badge { background-color: #8a8a8a; }
+
+        .dlc-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .carta {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 300px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s;
+        }
+        
+        .carta:hover {
+            transform: translateY(-5px);
+        }
+        
+        .carta button {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dlc-imagen {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+        }
+
+        .puntos-ganados {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 12px;
+            padding: 4px 8px;
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #ff9800;
+            font-weight: bold;
+            border: 1px solid #ff9800;
+        }
+        
+        .puntos-icono {
+            font-size: 0.9em;
+        }
+        
+        .puntos-cantidad {
+            color: #e65100;
+        }
+
+        footer {
+            background-color: rgb(230,230,230);
+            padding: 12px 0;
+            margin-top: 60px;
+        }
+        
+        footer p {
+            margin: 0;
+            padding: 12px;
+            color: rgb(100,100,100);
+            text-align: center;
+        }
+        
+        footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        @media (min-width: 720px) {
+            header .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            header nav {
+                flex-direction: row;
+                padding-bottom: 0;
+                padding-right: 20px;
+            }
+            
+            #dlc-hero h1 {
+                font-size: 4em;
+            }
+            
+            #dlc-hero {
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .dlc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        input::placeholder {
+            font-family: 'Fredoka', sans-serif !important;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <p class="logo">XtremeGaming</p>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#VideojuegosMas">Videojuegos</a>
+            <a href="tarjetas.html">Tarjetas Regalo</a>
+            <a href="dispositivos.html">Dispositivos</a>
+            <a href="dlc.html" style="color: orangered;">DLC</a>
+            <a href="index.html#caracteristicas">Sobre Nosotros</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="ajustes.html">Ajustes</a>
+            <a href="carrito.html">Carrito</a>
+            <a href="sugerencias.html">Sugerencias</a>
+            <a href="actualizaciones.html">Registro de Cambios</a>
+        </nav>
+    </div>
+</header>
+
+<section id="dlc-hero">
+    <h1>🎮 Contenido Descargable (DLC) 🎮</h1>
+    <p>Expande tu experiencia con los mejores DLC</p>
+</section>
+
+<section id="dlc-contenido" style="padding: 50px 12px;">
+    <div class="container">
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar DLC...">
+                <button id="searchButton">Buscar</button>
+            </div>
+        </div>
+        
+        <div class="filtros-container">
+            <div class="filtro-titulo" style="color: white; background-color: #333; padding: 10px 20px; border-radius: 25px; font-weight: bold;">
+                Filtrar por plataforma:
+            </div>
+            <div class="filtros-plataforma">
+                <button class="filtro-btn active" data-plataforma="todos">Todos</button>
+                <button class="filtro-btn" data-plataforma="nintendo">Nintendo</button>
+                <button class="filtro-btn" data-plataforma="playstation">PlayStation</button>
+                <button class="filtro-btn" data-plataforma="xbox">Xbox</button>
+                <button class="filtro-btn" data-plataforma="steam">Steam</button>
+                <button class="filtro-btn" data-plataforma="epic">Epic Games</button>
+            </div>
+        </div>
+        
+        <h2>DLC Disponibles</h2>
+        
+        <div class="no-results" id="noResultsMessage">
+            No se encontraron DLC que coincidan con tu búsqueda.
+        </div>
+
+        <div class="dlc-grid" id="dlc-grid">
+            
+            <div class="carta dlc-card" data-name="Fortnite Polar Legends Pack" data-plataformas="epic" data-precio="22.99">
+                <img src="media/polardlc.webp" alt="Fortnite Polar Legends" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Fortnite+Polar+Legends'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Fortnite - Polar Legends Pack
+                    <span class="plataforma-badge epic-badge">Epic Games</span>
+                </h3>
+                <p style="font-size: 0.95em;">Pack de skins y objetos exclusivos</p>
+                <button onclick="addToCartSimple('Fortnite - Polar Legends Pack', 22.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">230</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Zelda: TotK Expansion Pass" data-plataformas="nintendo" data-precio="29.99">
+                <img src="media/zeldadlc.png" alt="Zelda Expansion" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Zelda+TotK+Expansion'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Zelda: TotK - Expansion Pass
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                </h3>
+                <p style="font-size: 0.95em;">Nuevas misiones, objetos y contenido adicional</p>
+                <button onclick="addToCartSimple('Zelda: TotK - Expansion Pass', 29.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">300</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+
+            <div class="carta dlc-card" data-name="Cyberpunk 2077 - Phantom Liberty" data-plataformas="playstation,xbox,steam" data-precio="29.99">
+                <img src="media/phantomliberty.jpg" alt="Cyberpunk DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Cyberpunk+Phantom+Liberty'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Cyberpunk 2077 - Phantom Liberty
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                </h3>
+                <p style="font-size: 0.95em;">Expansión con nueva zona, historia y personajes</p>
+                <button onclick="addToCartSimple('Cyberpunk 2077 - Phantom Liberty', 29.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">300</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Elden Ring - Shadow of the Erdtree" data-plataformas="playstation,xbox,steam" data-precio="39.99">
+                <img src="media/eldendlc.jpg" alt="Elden Ring DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Elden+Ring+Shadow+of+the+Erdtree'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Elden Ring - Shadow of the Erdtree
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                </h3>
+                <p style="font-size: 0.95em;">Gran expansión con nueva área, jefes y armas</p>
+                <button onclick="addToCartSimple('Elden Ring - Shadow of the Erdtree', 39.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">400</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="SSBU - Fighters Pass Vol.2" data-plataformas="nintendo" data-precio="29.99">
+                <img src="media/smashdlc.jpg" alt="Smash DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Smash+Fighters+Pass'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">SSBU - Fighters Pass Vol.2
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                </h3>
+                <p style="font-size: 0.95em;">6 nuevos luchadores + escenarios y música</p>
+                <button onclick="addToCartSimple('SSBU - Fighters Pass Vol.2', 29.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">300</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Resident Evil 4 Remake - Separate Ways" data-plataformas="playstation,xbox,steam" data-precio="9.99">
+                <img src="media/re4dlc.webp" alt="Resident Evil 4 Remake DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Resident+Evil+4+Remake%3A+Separate+Ways'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Resident Evil 4 Remake - Separate Ways
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                </h3>
+                <p style="font-size: 0.95em;">Campaña adicional con Ada Wong</p>
+                <button onclick="addToCartSimple('Resident Evil 4 Remake - Separate Ways', 9.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">100</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="The Witcher 3 - Blood and Wine" data-plataformas="playstation,xbox,steam" data-precio="19.99">
+                <img src="media/witcherdlc.webp" alt="Witcher DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Witcher+Blood+and+Wine'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">The Witcher 3 - Blood and Wine
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                </h3>
+                <p style="font-size: 0.95em;">Expansión con nueva región de Toussaint</p>
+                <button onclick="addToCartSimple('The Witcher 3 - Blood and Wine', 19.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">200</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Mario Kart 8 - Booster Course Pass" data-plataformas="nintendo" data-precio="24.99">
+                <img src="media/mk8dlc.webp" alt="Mario Kart DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Mario+Kart+Booster+Course'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Mario Kart 8 - Booster Course Pass
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                </h3>
+                <p style="font-size: 0.95em;">48 circuitos nuevos de entregas pasadas</p>
+                <button onclick="addToCartSimple('Mario Kart 8 - Booster Course Pass', 24.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">250</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Xenoblade Chronicles 3 - Expansion Pass" data-plataformas="nintendo" data-precio="29.99">
+                <img src="media/xenobladedlc.avif" alt="Xenoblade DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Xenoblade+Expansion+Pass'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Xenoblade Chronicles 3 - Expansion Pass
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                </h3>
+                <p style="font-size: 0.95em;">Contenido adicional y historia extra "Future Redeemed"</p>
+                <button onclick="addToCartSimple('Xenoblade Chronicles 3 - Expansion Pass', 29.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">300</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Street Fighter 6 - Year 2 Pass" data-plataformas="playstation,xbox,steam" data-precio="29.99">
+                <img src="media/year2.avif" alt="Street Fighter DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Street+Fighter+6+Year+2'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Street Fighter 6 - Year 2 Pass
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                </h3>
+                <p style="font-size: 0.95em;">4 nuevos luchadores + skins y contenido</p>
+                <button onclick="addToCartSimple('Street Fighter 6 - Year 2 Pass', 29.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">300</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Donkey Kong Bananza: DK Island + Emerald Rush" data-plataformas="nintendo" data-precio="20.00">
+                <img src="media/Bananzadlc.avif" alt="Donkey Kong DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Donkey+Kong+Bananza%3A+DK+Island+%2B+Emerald+Rush'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Donkey Kong Bananza: DK Island + Emerald Rush
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                </h3>
+                <p style="font-size: 0.95em;">Nueva isla + contenido extra</p>
+                <button onclick="addToCartSimple('Donkey Kong Bananza: DK Island + Emerald Rush', 20.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">200</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Mario + Rabbids: Kingdom Battle: Donkey Kong Adventure" data-plataformas="nintendo" data-precio="15.00">
+                <img src="media/rabbidsdlc.jpg" alt="Mario + Rabbids DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Donkey+Kong+Bananza%3A+DK+Island+%2B+Emerald+Rush'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Mario + Rabbids: Kingdom Battle: Donkey Kong Adventure
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                </h3>
+                <p style="font-size: 0.95em;">Nueva adventura adicional</p>
+                <button onclick="addToCartSimple('Mario + Rabbids: Kingdom Battle: Donkey Kong Adventure', 15.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">150</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Sonic Mania Plus" data-plataformas="nintendo,playstation,xbox,epic" data-precio="5.00">
+                <img src="media/sonicplus.png" alt="Sonic Mania Plus DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Sonic+Mania+Plus'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Sonic Mania Plus
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge epic-badge">Epic Games</span>
+                </h3>
+                <p style="font-size: 0.95em;">Nuevo contenido adicional</p>
+                <button onclick="addToCartSimple('Sonic Mania Plus', 5.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">50</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Resident Evil Village: Winters Expansion" data-plataformas="playstation,xbox,steam" data-precio="20.00">
+                <img src="media/Re8dlc.jpg" alt="Resident Evil Village: Winters Expansion DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Resident+Evil+Village%3A+Winters+Expansion'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Resident Evil Village: Winters Expansion
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                </h3>
+                <p style="font-size: 0.95em;">Nuevo contenido adicional</p>
+                <button onclick="addToCartSimple('Resident Evil Village: Winters Expansion', 20.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">200</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dlc-card" data-name="Resident Evil 2 Remake: Extra Content" data-plataformas="playstation,xbox,steam" data-precio="15.00">
+                <img src="media/re2dlc.jpg" alt="Resident Evil 2 Remake: Extra Content DLC" class="dlc-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Resident+Evil+2+Remake%3A+Extra+Content'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Resident Evil 2 Remake: Extra Content
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                </h3>
+                <p style="font-size: 0.95em;">Nuevo contenido adicional</p>
+                <button onclick="addToCartSimple('Resident Evil 2 Remake: Extra Content', 15.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">150</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; XtremeGaming 2026 - Contenido Descargable (DLC)</p>
+    </div>
+</footer>
+
+<script>
+    let plataformasSeleccionadas = ['todos'];
+    
+    function addToCartSimple(nombre, precio) {
+        const producto = {
+            nombre: nombre,
+            precio: precio,
+            cantidad: 1
+        };
+        
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        alert(`✓ Añadido: ${nombre} ($${precio})`);
+        
+        if (confirm('¿Ir al carrito?')) {
+            window.location.href = 'carrito.html';
+        }
+        // Si el usuario hace clic en "Cancelar", simplemente no redirige
+    }
+    
+    function filterDLC(searchTerm) {
+        const dlcs = document.querySelectorAll('.dlc-card');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        let visibleCount = 0;
+        
+        searchTerm = searchTerm.toLowerCase().trim();
+        
+        dlcs.forEach(dlc => {
+            const dlcName = dlc.getAttribute('data-name').toLowerCase();
+            
+            if (dlcName.includes(searchTerm) || searchTerm === '') {
+                dlc.classList.remove('dlc-hidden');
+                visibleCount++;
+            } else {
+                dlc.classList.add('dlc-hidden');
+            }
+        });
+        
+        if (visibleCount === 0 && searchTerm !== '') {
+            noResultsMessage.classList.add('show');
+        } else {
+            noResultsMessage.classList.remove('show');
+        }
+        
+        if (searchTerm !== '') {
+            document.getElementById('dlc-contenido').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    }
+    
+    function togglePlataforma(plataforma) {
+        const btnTodos = document.querySelector('[data-plataforma="todos"]');
+        
+        if (plataforma === 'todos') {
+            document.querySelectorAll('.filtro-btn').forEach(btn => {
+                if (btn.getAttribute('data-plataforma') !== 'todos') {
+                    btn.classList.remove('active');
+                }
+            });
+            btnTodos.classList.add('active');
+            plataformasSeleccionadas = ['todos'];
+        } 
+        else {
+            if (plataformasSeleccionadas.includes('todos')) {
+                btnTodos.classList.remove('active');
+                plataformasSeleccionadas = plataformasSeleccionadas.filter(p => p !== 'todos');
+            }
+            
+            const index = plataformasSeleccionadas.indexOf(plataforma);
+            if (index === -1) {
+                plataformasSeleccionadas.push(plataforma);
+                event.target.classList.add('active');
+            } else {
+                plataformasSeleccionadas.splice(index, 1);
+                event.target.classList.remove('active');
+            }
+            
+            if (plataformasSeleccionadas.length === 0) {
+                btnTodos.classList.add('active');
+                plataformasSeleccionadas = ['todos'];
+            }
+        }
+        
+        aplicarFiltros();
+    }
+    
+    function aplicarFiltros() {
+        const dlcs = document.querySelectorAll('.dlc-card');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+        let visibleCount = 0;
+        
+        if (plataformasSeleccionadas.includes('todos')) {
+            dlcs.forEach(dlc => {
+                const dlcName = dlc.getAttribute('data-name').toLowerCase();
+                const matchesSearch = searchTerm === '' || dlcName.includes(searchTerm);
+                
+                if (matchesSearch) {
+                    dlc.classList.remove('dlc-hidden');
+                    visibleCount++;
+                } else {
+                    dlc.classList.add('dlc-hidden');
+                }
+            });
+        } 
+        else {
+            dlcs.forEach(dlc => {
+                const dlcName = dlc.getAttribute('data-name').toLowerCase();
+                const plataformasDLC = dlc.getAttribute('data-plataformas').split(',');
+                
+                const matchesPlatform = plataformasSeleccionadas.some(plataforma => 
+                    plataformasDLC.includes(plataforma)
+                );
+                
+                const matchesSearch = searchTerm === '' || dlcName.includes(searchTerm);
+                
+                if (matchesPlatform && matchesSearch) {
+                    dlc.classList.remove('dlc-hidden');
+                    visibleCount++;
+                } else {
+                    dlc.classList.add('dlc-hidden');
+                }
+            });
+        }
+        
+        if (visibleCount === 0) {
+            noResultsMessage.classList.add('show');
+        } else {
+            noResultsMessage.classList.remove('show');
+        }
+        
+        if (searchTerm !== '') {
+            setTimeout(() => {
+                document.getElementById('dlc-contenido').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+    }
+    
+    document.getElementById('searchButton').addEventListener('click', function() {
+        aplicarFiltros();
+    });
+    
+    document.getElementById('searchInput').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            aplicarFiltros();
+        }
+    });
+    
+    document.getElementById('searchInput').addEventListener('input', function() {
+        if (this.value === '') {
+            aplicarFiltros();
+        }
+    });
+    
+    document.querySelectorAll('.filtro-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const plataforma = this.getAttribute('data-plataforma');
+            togglePlataforma(plataforma);
+        });
+    });
+    
+    window.addEventListener('load', function() {
+        filterDLC('');
+    });
+</script>
+
+</body>
+</html>

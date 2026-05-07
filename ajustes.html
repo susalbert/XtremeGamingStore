@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajustes - XtremeGaming</title>
+    <link rel="icon" href="media/icono.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .ajuste-card,
+        body.dark-mode .guardar-container,
+        body.dark-mode .modal,
+        body.dark-mode .sorteo-container {
+            background-color: #2a2a2a;
+            border-color: #444;
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode .opcion {
+            border-bottom-color: #444;
+        }
+        
+        body.dark-mode .select-estilo {
+            background-color: #3a3a3a;
+            color: #f0f0f0;
+            border-color: #555;
+        }
+        
+        body.dark-mode .formulario,
+        body.dark-mode .perfil-card,
+        body.dark-mode .configuracion-card {
+            background-color: #2a2a2a;
+        }
+        
+        body.dark-mode .puntos-ganados {
+            background: linear-gradient(135deg, #2a2a2a, #333);
+            border-color: #ff9800;
+        }
+        
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.7em; }
+        h3 { font-size: 2em; }
+        h4 { font-size: 1.5em; }
+        p { font-size: 1.25em; }
+        
+        button {
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.5);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            color: white;
+            background-color: orangered;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background-color: rgba(255, 72, 0, 0.8);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        
+        .color-acento {
+            color: orangered;
+        }
+
+        header {
+            background-color: rgb(245,245,245);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: background-color 0.3s;
+        }
+        
+        body.dark-mode header {
+            background-color: #2a2a2a;
+        }
+        
+        body.dark-mode header a {
+            color: #f0f0f0;
+        }
+        
+        body.dark-mode header a:hover {
+            color: orangered;
+        }
+        
+        header .logo {
+            margin: 0;
+            padding: 25px 30px;
+            font-weight: bold;
+            color: orangered;
+            font-size: 1.6em;
+        }
+        
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header nav {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding-bottom: 25px;
+        }
+        
+        header a {
+            padding: 5px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+            transition: color 0.3s;
+        }
+        
+        header a:hover {
+            color: orangered;
+        }
+
+        #ajustes-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            height: 40vh;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url(media/room-with-lot-games-video-game-wall_875765-5370.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            padding-top: 100px;
+            margin-top: 80px;
+        }
+        
+        #ajustes-hero h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        #ajustes-hero p {
+            color: white;
+            font-size: 1.5em;
+        }
+
+        #ajustes-contenido {
+            padding: 100px 12px;
+            background-color: transparent;
+        }
+        
+        #ajustes-contenido h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            color: inherit;
+        }
+
+        /* SECCIONES DE AJUSTES */
+        .ajustes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .ajuste-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid orangered;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .ajuste-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .ajuste-titulo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+        
+        body.dark-mode .ajuste-titulo {
+            border-bottom-color: #444;
+        }
+        
+        .ajuste-titulo i {
+            font-size: 1.8em;
+            color: orangered;
+        }
+        
+        .ajuste-titulo h3 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+        
+        .opcion {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            transition: border-color 0.3s;
+        }
+        
+        .opcion:last-child {
+            border-bottom: none;
+        }
+        
+        .opcion-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 1.1em;
+        }
+        
+        .opcion-info p {
+            margin: 0;
+            color: #777;
+            font-size: 0.9em;
+        }
+        
+        body.dark-mode .opcion-info p {
+            color: #aaa;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 52px;
+            height: 28px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.3s;
+            border-radius: 28px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: orangered;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+        
+        .select-estilo {
+            padding: 8px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 0.95em;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .select-estilo:hover {
+            border-color: orangered;
+        }
+        
+        .select-estilo:focus {
+            outline: none;
+            border-color: orangered;
+        }
+        
+        body.dark-mode .select-estilo {
+            background-color: #3a3a3a;
+            color: #f0f0f0;
+            border-color: #555;
+        }
+        
+        .guardar-container {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            border-radius: 15px;
+            transition: background 0.3s;
+        }
+        
+        body.dark-mode .guardar-container {
+            background: linear-gradient(135deg, #2a2a2a, #333);
+        }
+        
+        .btn-guardar {
+            font-size: 1.3em;
+            padding: 15px 50px;
+            background: linear-gradient(45deg, orangered, #ff6b6b);
+            border: none;
+            transition: all 0.3s;
+        }
+        
+        .btn-guardar:hover {
+            transform: scale(1.05);
+            background: linear-gradient(45deg, #ff6b6b, orangered);
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+        
+        body.dark-mode .modal {
+            background-color: #2a2a2a;
+        }
+        
+        .modal h3 {
+            margin-top: 0;
+            color: inherit;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .modal-btn.confirm {
+            background-color: orangered;
+            color: white;
+        }
+        
+        .modal-btn.cancel {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        body.dark-mode .modal-btn.cancel {
+            background-color: #444;
+            color: #f0f0f0;
+        }
+
+        footer {
+            background-color: rgb(230,230,230);
+            padding: 12px 0;
+            margin-top: 60px;
+            transition: background-color 0.3s;
+        }
+        
+        body.dark-mode footer {
+            background-color: #2a2a2a;
+        }
+        
+        footer p {
+            margin: 0;
+            padding: 12px;
+            color: rgb(100,100,100);
+            text-align: center;
+            transition: color 0.3s;
+        }
+        
+        body.dark-mode footer p {
+            color: #aaa;
+        }
+        
+        footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        @media (min-width: 720px) {
+            header .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            header nav {
+                flex-direction: row;
+                padding-bottom: 0;
+                padding-right: 20px;
+            }
+            
+            #ajustes-hero h1 {
+                font-size: 4em;
+            }
+            
+            #ajustes-hero {
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .ajustes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .opcion {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+        
+        body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
+            font-family: 'Fredoka', sans-serif !important;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <p class="logo" id="logo-text">XtremeGaming</p>
+        <nav id="nav-menu">
+            <a href="index.html" id="nav-inicio">Inicio</a>
+            <a href="index.html#VideojuegosMas" id="nav-videojuegos">Videojuegos</a>
+            <a href="tarjetas.html" id="nav-tarjetas">Tarjetas Regalo</a>
+            <a href="dispositivos.html" id="nav-dispositivos">Dispositivos</a>
+            <a href="dlc.html" id="nav-dlc">DLC</a>
+            <a href="index.html#caracteristicas" id="nav-sobrenosotros">Sobre Nosotros</a>
+            <a href="perfil.html" id="nav-perfil">Perfil</a>
+            <a href="ajustes.html" id="nav-ajustes" style="color: orangered;">Ajustes</a>
+            <a href="carrito.html" id="nav-carrito">Carrito</a>
+            <a href="sugerencias.html" id="nav-sugerencias">Sugerencias</a>
+            <a href="actualizaciones.html" id="nav-actualizaciones">Registro de Cambios</a>
+        </nav>
+    </div>
+</header>
+
+<section id="ajustes-hero">
+    <h1 id="hero-title">⚙️ Ajustes ⚙️</h1>
+    <p id="hero-subtitle">Personaliza XtremeGaming a tu manera</p>
+</section>
+
+<section id="ajustes-contenido">
+    <div class="container">
+        <h2 id="config-title">Configuración de la página</h2>
+        
+        <div class="ajustes-grid">
+            <div class="ajuste-card">
+                <div class="ajuste-titulo">
+                    <i class="fas fa-palette"></i>
+                    <h3 id="apariencia-title">Apariencia</h3>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="darkmode-title">Modo Oscuro</h4>
+                        <p id="darkmode-desc">Activa el tema oscuro para la página</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="darkModeToggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="animations-title">Animaciones</h4>
+                        <p id="animations-desc">Activa las animaciones de la página</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="animationsToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ajuste-card">
+                <div class="ajuste-titulo">
+                    <i class="fas fa-language"></i>
+                    <h3 id="idioma-title">Idioma</h3>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="idioma-select-title">Idioma de la página</h4>
+                        <p id="idioma-select-desc">Selecciona tu idioma preferido</p>
+                    </div>
+                    <select id="languageSelect" class="select-estilo">
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="en">🇬🇧 English</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="ajuste-card">
+                <div class="ajuste-titulo">
+                    <i class="fas fa-bell"></i>
+                    <h3 id="notificaciones-title">Notificaciones</h3>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="ofertas-title">Notificaciones de ofertas</h4>
+                        <p id="ofertas-desc">Recibe alertas sobre ofertas especiales</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="ofertasToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="sorteos-title">Notificaciones de sorteos</h4>
+                        <p id="sorteos-desc">Recibe alertas sobre nuevos sorteos</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="sorteosToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ajuste-card">
+                <div class="ajuste-titulo">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3 id="privacidad-title">Privacidad</h3>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="remember-title">Recordar sesión</h4>
+                        <p id="remember-desc">Mantener la sesión iniciada</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="rememberSessionToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="activity-title">Mostrar actividad reciente</h4>
+                        <p id="activity-desc">Mostrar tus últimas compras en el perfil</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="recentActivityToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ajuste-card">
+                <div class="ajuste-titulo">
+                    <i class="fas fa-gamepad"></i>
+                    <h3 id="preferencias-title">Preferencias de juegos</h3>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="recentgames-title">Mostrar juegos jugados recientemente</h4>
+                        <p id="recentgames-desc">Muestra tus juegos recientes en el perfil</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="recentGamesToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="recomendaciones-title">Recomendaciones personalizadas</h4>
+                        <p id="recomendaciones-desc">Recibe recomendaciones basadas en tus compras</p>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="recommendationsToggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ajuste-card">
+                <div class="ajuste-titulo">
+                    <i class="fas fa-headset"></i>
+                    <h3 id="soporte-title">Soporte</h3>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="ayuda-title">Ayuda rápida</h4>
+                        <p id="ayuda-desc">Acceso directo al soporte técnico</p>
+                    </div>
+                    <button onclick="location.href='soporte.html'" style="padding: 8px 20px; font-size: 0.9em;" id="ayuda-btn">Ir al soporte</button>
+                </div>
+                <div class="opcion">
+                    <div class="opcion-info">
+                        <h4 id="reportar-title">Reportar un problema</h4>
+                        <p id="reportar-desc">Envía un reporte al equipo técnico</p>
+                    </div>
+                    <button onclick="location.href='soporte.html'" style="padding: 8px 20px; font-size: 0.9em;" id="reportar-btn">Reportar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="guardar-container">
+            <button class="btn-guardar" onclick="guardarAjustes()" id="guardar-btn">
+                💾 GUARDAR CAMBIOS
+            </button>
+        </div>
+    </div>
+</section>
+
+<div id="modal-ajustes" class="modal-overlay" onclick="cerrarModal(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+        <h3 id="modal-title">✅ ¡Ajustes guardados!</h3>
+        <p id="modal-text">Tus preferencias han sido guardadas correctamente.</p>
+        <div class="modal-buttons">
+            <button class="modal-btn confirm" onclick="cerrarModal()" id="modal-btn">Aceptar</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p id="footer-text">&copy; XtremeGaming 2026 - Ajustes de la página</p>
+    </div>
+</footer>
+
+<script>
+    const textos = {
+        es: {
+            logo: "XtremeGaming",
+            nav_inicio: "Inicio",
+            nav_videojuegos: "Videojuegos",
+            nav_tarjetas: "Tarjetas Regalo",
+            nav_dispositivos: "Dispositivos",
+            nav_dlc: "DLC",
+            nav_sobrenosotros: "Sobre Nosotros",
+            nav_perfil: "Perfil",
+            nav_ajustes: "Ajustes",
+            nav_carrito: "Carrito",
+            nav_sugerencias: "Sugerencias",
+            nav_actualizaciones: "Registro de Cambios",
+            hero_title: "⚙️ Ajustes ⚙️",
+            hero_subtitle: "Personaliza XtremeGaming a tu manera",
+            config_title: "Configuración de la página",
+            apariencia_title: "Apariencia",
+            darkmode_title: "Modo Oscuro",
+            darkmode_desc: "Activa el tema oscuro para la página",
+            animations_title: "Animaciones",
+            animations_desc: "Activa las animaciones de la página",
+            idioma_title: "Idioma",
+            idioma_select_title: "Idioma de la página",
+            idioma_select_desc: "Selecciona tu idioma preferido",
+            notificaciones_title: "Notificaciones",
+            ofertas_title: "Notificaciones de ofertas",
+            ofertas_desc: "Recibe alertas sobre ofertas especiales",
+            sorteos_title: "Notificaciones de sorteos",
+            sorteos_desc: "Recibe alertas sobre nuevos sorteos",
+            privacidad_title: "Privacidad",
+            remember_title: "Recordar sesión",
+            remember_desc: "Mantener la sesión iniciada",
+            activity_title: "Mostrar actividad reciente",
+            activity_desc: "Mostrar tus últimas compras en el perfil",
+            preferencias_title: "Preferencias de juegos",
+            recentgames_title: "Mostrar juegos jugados recientemente",
+            recentgames_desc: "Muestra tus juegos recientes en el perfil",
+            recomendaciones_title: "Recomendaciones personalizadas",
+            recomendaciones_desc: "Recibe recomendaciones basadas en tus compras",
+            soporte_title: "Soporte",
+            ayuda_title: "Ayuda rápida",
+            ayuda_desc: "Acceso directo al soporte técnico",
+            reportar_title: "Reportar un problema",
+            reportar_desc: "Envía un reporte al equipo técnico",
+            ayuda_btn: "Ir al soporte",
+            reportar_btn: "Reportar",
+            guardar_btn: "💾 GUARDAR CAMBIOS",
+            modal_title: "✅ ¡Ajustes guardados!",
+            modal_text: "Tus preferencias han sido guardadas correctamente.",
+            modal_btn: "Aceptar",
+            footer_text: "© XtremeGaming 2026 - Ajustes de la página"
+        },
+        en: {
+            logo: "XtremeGaming",
+            nav_inicio: "Home",
+            nav_videojuegos: "Games",
+            nav_tarjetas: "Gift Cards",
+            nav_dispositivos: "Devices",
+            nav_dlc: "DLC",
+            nav_sobrenosotros: "About Us",
+            nav_perfil: "Profile",
+            nav_ajustes: "Settings",
+            nav_carrito: "Cart",
+            nav_sugerencias: "Suggestions",
+            nav_actualizaciones: "Changelog",
+            hero_title: "⚙️ Settings ⚙️",
+            hero_subtitle: "Customize XtremeGaming your way",
+            config_title: "Page Settings",
+            apariencia_title: "Appearance",
+            darkmode_title: "Dark Mode",
+            darkmode_desc: "Activate dark theme for the page",
+            animations_title: "Animations",
+            animations_desc: "Enable page animations",
+            idioma_title: "Language",
+            idioma_select_title: "Page Language",
+            idioma_select_desc: "Select your preferred language",
+            notificaciones_title: "Notifications",
+            ofertas_title: "Offer Notifications",
+            ofertas_desc: "Receive alerts about special offers",
+            sorteos_title: "Giveaway Notifications",
+            sorteos_desc: "Receive alerts about new giveaways",
+            privacidad_title: "Privacy",
+            remember_title: "Remember session",
+            remember_desc: "Keep me logged in",
+            activity_title: "Show recent activity",
+            activity_desc: "Show your recent purchases on your profile",
+            preferencias_title: "Game Preferences",
+            recentgames_title: "Show recently played games",
+            recentgames_desc: "Show your recent games on your profile",
+            recomendaciones_title: "Personalized recommendations",
+            recomendaciones_desc: "Receive recommendations based on your purchases",
+            soporte_title: "Support",
+            ayuda_title: "Quick Help",
+            ayuda_desc: "Direct access to technical support",
+            reportar_title: "Report a problem",
+            reportar_desc: "Send a report to the technical team",
+            ayuda_btn: "Go to Support",
+            reportar_btn: "Report",
+            guardar_btn: "💾 SAVE CHANGES",
+            modal_title: "✅ Settings saved!",
+            modal_text: "Your preferences have been saved successfully.",
+            modal_btn: "OK",
+            footer_text: "© XtremeGaming 2026 - Page Settings"
+        }
+    };
+    
+    let idiomaActual = 'es';
+    
+    function aplicarIdioma(idioma) {
+        const t = textos[idioma];
+        
+        document.getElementById('logo-text').textContent = t.logo;
+        document.getElementById('nav-inicio').textContent = t.nav_inicio;
+        document.getElementById('nav-videojuegos').textContent = t.nav_videojuegos;
+        document.getElementById('nav-tarjetas').textContent = t.nav_tarjetas;
+        document.getElementById('nav-dispositivos').textContent = t.nav_dispositivos;
+        document.getElementById('nav-dlc').textContent = t.nav_dlc;
+        document.getElementById('nav-sobrenosotros').textContent = t.nav_sobrenosotros;
+        document.getElementById('nav-perfil').textContent = t.nav_perfil;
+        document.getElementById('nav-ajustes').textContent = t.nav_ajustes;
+        document.getElementById('nav-carrito').textContent = t.nav_carrito;
+        document.getElementById('nav-sugerencias').textContent = t.nav_sugerencias;
+        document.getElementById('nav-actualizaciones').textContent = t.nav_actualizaciones;
+        
+        document.getElementById('hero-title').textContent = t.hero_title;
+        document.getElementById('hero-subtitle').textContent = t.hero_subtitle;
+        
+        document.getElementById('config-title').textContent = t.config_title;
+        document.getElementById('apariencia-title').textContent = t.apariencia_title;
+        document.getElementById('darkmode-title').textContent = t.darkmode_title;
+        document.getElementById('darkmode-desc').textContent = t.darkmode_desc;
+        document.getElementById('animations-title').textContent = t.animations_title;
+        document.getElementById('animations-desc').textContent = t.animations_desc;
+        document.getElementById('idioma-title').textContent = t.idioma_title;
+        document.getElementById('idioma-select-title').textContent = t.idioma_select_title;
+        document.getElementById('idioma-select-desc').textContent = t.idioma_select_desc;
+        document.getElementById('notificaciones-title').textContent = t.notificaciones_title;
+        document.getElementById('ofertas-title').textContent = t.ofertas_title;
+        document.getElementById('ofertas-desc').textContent = t.ofertas_desc;
+        document.getElementById('sorteos-title').textContent = t.sorteos_title;
+        document.getElementById('sorteos-desc').textContent = t.sorteos_desc;
+        document.getElementById('privacidad-title').textContent = t.privacidad_title;
+        document.getElementById('remember-title').textContent = t.remember_title;
+        document.getElementById('remember-desc').textContent = t.remember_desc;
+        document.getElementById('activity-title').textContent = t.activity_title;
+        document.getElementById('activity-desc').textContent = t.activity_desc;
+        document.getElementById('preferencias-title').textContent = t.preferencias_title;
+        document.getElementById('recentgames-title').textContent = t.recentgames_title;
+        document.getElementById('recentgames-desc').textContent = t.recentgames_desc;
+        document.getElementById('recomendaciones-title').textContent = t.recomendaciones_title;
+        document.getElementById('recomendaciones-desc').textContent = t.recomendaciones_desc;
+        document.getElementById('soporte-title').textContent = t.soporte_title;
+        document.getElementById('ayuda-title').textContent = t.ayuda_title;
+        document.getElementById('ayuda-desc').textContent = t.ayuda_desc;
+        document.getElementById('reportar-title').textContent = t.reportar_title;
+        document.getElementById('reportar-desc').textContent = t.reportar_desc;
+        document.getElementById('ayuda-btn').textContent = t.ayuda_btn;
+        document.getElementById('reportar-btn').textContent = t.reportar_btn;
+        document.getElementById('guardar-btn').textContent = t.guardar_btn;
+        document.getElementById('modal-title').textContent = t.modal_title;
+        document.getElementById('modal-text').textContent = t.modal_text;
+        document.getElementById('modal-btn').textContent = t.modal_btn;
+        document.getElementById('footer-text').textContent = t.footer_text;
+    }
+    
+    function aplicarModoOscuro(activado) {
+        if (activado) {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+    }
+    
+    function cargarAjustes() {
+        const darkMode = localStorage.getItem('darkMode') === 'true';
+        document.getElementById('darkModeToggle').checked = darkMode;
+        aplicarModoOscuro(darkMode);
+        
+        const animations = localStorage.getItem('animations') !== 'false';
+        document.getElementById('animationsToggle').checked = animations;
+        
+        const idioma = localStorage.getItem('idioma') || 'es';
+        idiomaActual = idioma;
+        document.getElementById('languageSelect').value = idioma;
+        aplicarIdioma(idioma);
+        
+        const ofertas = localStorage.getItem('ofertas') !== 'false';
+        document.getElementById('ofertasToggle').checked = ofertas;
+        
+        const sorteos = localStorage.getItem('sorteos') !== 'false';
+        document.getElementById('sorteosToggle').checked = sorteos;
+        
+        const rememberSession = localStorage.getItem('rememberSession') !== 'false';
+        document.getElementById('rememberSessionToggle').checked = rememberSession;
+        
+        const recentActivity = localStorage.getItem('recentActivity') !== 'false';
+        document.getElementById('recentActivityToggle').checked = recentActivity;
+        
+        const recentGames = localStorage.getItem('recentGames') !== 'false';
+        document.getElementById('recentGamesToggle').checked = recentGames;
+        
+        const recommendations = localStorage.getItem('recommendations') !== 'false';
+        document.getElementById('recommendationsToggle').checked = recommendations;
+        
+        if (!animations) {
+            document.querySelectorAll('.carta, .ajuste-card, .btn-guardar, button').forEach(el => {
+                el.style.transition = 'none';
+            });
+        }
+    }
+    
+    document.getElementById('darkModeToggle').addEventListener('change', function(e) {
+        aplicarModoOscuro(e.target.checked);
+    });
+    
+    document.getElementById('languageSelect').addEventListener('change', function(e) {
+        idiomaActual = e.target.value;
+        aplicarIdioma(idiomaActual);
+    });
+    
+    function guardarAjustes() {
+        localStorage.setItem('darkMode', document.getElementById('darkModeToggle').checked);
+        localStorage.setItem('animations', document.getElementById('animationsToggle').checked);
+        localStorage.setItem('idioma', document.getElementById('languageSelect').value);
+        localStorage.setItem('ofertas', document.getElementById('ofertasToggle').checked);
+        localStorage.setItem('sorteos', document.getElementById('sorteosToggle').checked);
+        localStorage.setItem('rememberSession', document.getElementById('rememberSessionToggle').checked);
+        localStorage.setItem('recentActivity', document.getElementById('recentActivityToggle').checked);
+        localStorage.setItem('recentGames', document.getElementById('recentGamesToggle').checked);
+        localStorage.setItem('recommendations', document.getElementById('recommendationsToggle').checked);
+        
+        document.getElementById('modal-ajustes').style.display = 'flex';
+        
+        const animations = document.getElementById('animationsToggle').checked;
+        if (!animations) {
+            document.querySelectorAll('.carta, .ajuste-card, .btn-guardar, button').forEach(el => {
+                el.style.transition = 'none';
+            });
+        } else {
+            document.querySelectorAll('.carta, .ajuste-card, .btn-guardar, button').forEach(el => {
+                el.style.transition = '';
+            });
+        }
+    }
+    
+    function cerrarModal(event) {
+        if (!event || event.target === document.getElementById('modal-ajustes')) {
+            document.getElementById('modal-ajustes').style.display = 'none';
+        }
+    }
+    
+    cargarAjustes();
+</script>
+
+</body>
+</html>

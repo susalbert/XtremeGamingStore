@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugerencias - XtremeGaming</title>
+    <link rel="icon" href="media/icono.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+
+        html{
+            scroll-behavior: smooth;
+        }
+
+        body{
+            font-family: 'Fredoka', sans-serif;
+            margin: 0;
+        }
+
+        h1{ font-size: 3.5em; font-family: 'Fredoka', sans-serif;}
+        h2{ font-size: 2.7em; font-family: 'Fredoka', sans-serif;}
+        h3{ font-size: 2em; font-family: 'Fredoka', sans-serif;}
+        p{ font-size: 1.25em; font-family: 'Fredoka', sans-serif;}
+        ul{ list-style: none;}
+        li{ font-size: 1.25em; font-family: 'Fredoka', sans-serif;}
+
+        button{
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 10px 30px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.5);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            color: white;
+            background-color: orangered;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        button:hover{
+            background-color: rgba(255, 72, 0, 0.8);
+        }
+
+        .container{
+            max-width: 1400px;
+            margin: auto;
+        }
+
+        .color-acento{ color:orangered; }
+
+        header{
+            background-color: rgb(245,245,245);
+        }
+
+        header .logo{
+            margin: 0;
+            padding: 25px 30px;
+            font-weight: bold;
+            color: orangered;
+            font-size: 1.6em;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        header .container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header nav{
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding-bottom: 25px;
+        }
+
+        header a{
+            padding: 5px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        header a:hover{
+            color: orangered;
+        }
+
+        #sugerencias-hero{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            height: 40vh;
+            background-image: linear-gradient(
+                0deg,
+                rgba(0,0,0,0.5),
+                rgba(0,0,0,0.5)
+            ),
+            url(media/room-with-lot-games-video-game-wall_875765-5370.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+        }
+
+        #sugerencias-hero h1{
+            color: white;
+            margin-bottom: 20px;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        #sugerencias-hero p{
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        #sugerencias-contenido{
+            padding: 100px 12px;
+            background-color: white;
+        }
+
+        #sugerencias-contenido h2{
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .sugerencias-box{
+            background-color: #f5f5f5;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 1000px;
+            margin: 0 auto 50px;
+            border-left: 5px solid orangered;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .sugerencias-box h3{
+            margin-top: 0;
+            color: #333;
+            margin-bottom: 20px;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        .sugerencias-box p{
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        textarea{
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1em;
+            margin: 15px 0;
+            resize: vertical;
+            min-height: 200px;
+        }
+
+        textarea:focus{
+            outline: none;
+            border-color: orangered;
+        }
+
+        textarea::placeholder {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        #mensaje-exito{
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        footer{
+            background-color: rgb(230,230,230);
+        }
+
+        footer p{
+            margin: 0;
+            padding: 12px;
+            color: rgb(100,100,100);
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        footer .container{
+            height: 150px;
+            justify-content: center;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        @media (min-width: 720px){
+            header{
+                position: fixed;
+                width: 100%;
+            }
+
+            header .container{
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            header nav{
+                flex-direction: row;
+                padding-bottom: 0;
+                padding-right: 20px;
+            }
+
+            #sugerencias-hero h1{
+                font-size: 4em;
+            }
+        }
+        
+        body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
+            font-family: 'Fredoka', sans-serif !important;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <p class="logo">XtremeGaming</p>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#VideojuegosMas">Videojuegos</a>
+            <a href="tarjetas.html">Tarjetas Regalo</a>
+            <a href="dispositivos.html">Dispositivos</a>
+            <a href="dlc.html">DLC</a>
+            <a href="index.html#caracteristicas">Sobre Nosotros</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="ajustes.html">Ajustes</a>
+            <a href="carrito.html">Carrito</a>
+            <a href="sugerencias.html" style="color: orangered;">Sugerencias</a>
+            <a href="actualizaciones.html">Registro de Cambios</a>
+        </nav>
+    </div>
+</header>
+
+<section id="sugerencias-hero">
+    <h1>Sugerencias</h1>
+    <p style="color: white; font-size: 1.5em;">Ayúdanos a mejorar nuestra tienda</p>
+</section>
+
+<section id="sugerencias-contenido">
+    <div class="container">
+        <h2>Tienes una idea? Enviala!</h2>
+        
+        <div class="sugerencias-box">
+            <h3>📝 Comparte tus sugerencias</h3>
+            <p>Tu opinión es muy importante para nosotros. Si tienes alguna idea para mejorar nuestra tienda, nuevos productos que te gustaría ver, o cualquier comentario, escríbelo aquí.</p>
+            
+            <textarea id="sugerencia-texto" placeholder="Escribe aquí tu sugerencia, comentario o idea..."></textarea>
+            
+            <button id="enviar-sugerencia">Enviar Sugerencia</button>
+            
+            <div id="mensaje-exito">
+                ✅ Sugerencia enviada con éxito
+            </div>
+        </div>
+        
+        <div style="text-align: center; color: #666; font-size: 0.9em; max-width: 800px; margin: 0 auto;">
+            <p>Nota: Todas las sugerencias son anónimas. Nuestro equipo revisará cada mensaje para implementar las mejoras que nos ayuden a ofrecerte un mejor servicio.</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; XtremeGaming 2026 - Sugerencias</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('enviar-sugerencia').onclick = function() {
+        const textarea = document.getElementById('sugerencia-texto');
+        const texto = textarea.value.trim();
+        
+        if (texto === '') {
+            alert('Por favor escribe una sugerencia antes de enviar.');
+            return;
+        }
+        
+        textarea.value = '';
+        
+        const mensaje = document.getElementById('mensaje-exito');
+        mensaje.style.display = 'block';
+        
+        setTimeout(function() {
+            mensaje.style.display = 'none';
+        }, 3000);
+        
+        console.log("Sugerencia enviada:", texto);
+    };
+</script>
+
+</body>
+</html>

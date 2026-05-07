@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - XtremeGaming</title>
+    <link rel="icon" href="media/icono.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *{ box-sizing: border-box; }
+        html{ scroll-behavior: smooth; }
+        body{ font-family: 'Fredoka', sans-serif; margin: 0; }
+        h1{ font-size: 3.5em; } h2{ font-size: 2.7em; } h3{ font-size: 2em; } p{ font-size: 1.25em; }
+        button{
+            font-size: 1em; font-weight: bold; padding: 10px 20px; border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.5); box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            color: white; background-color: orangered; cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+        }
+        button:hover{ background-color: rgba(255, 72, 0, 0.8); }
+        button:disabled{
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .container{ max-width: 1400px; margin: auto; }
+        .color-acento{ color:orangered; }
+
+        header{ background-color: rgb(245,245,245); }
+        header .logo{ margin: 0; padding: 25px 30px; font-weight: bold; color: orangered; font-size: 1.6em; font-family: 'Fredoka', sans-serif; }
+        header .container{ display: flex; flex-direction: column; align-items: center; }
+        header nav{ display: flex; flex-direction: column; text-align: center; padding-bottom: 25px; }
+        header a{ padding: 5px 12px; text-decoration: none; font-weight: bold; color: black; font-family: 'Fredoka', sans-serif; }
+        header a:hover{ color: orangered; }
+
+        #carrito-hero{
+            display: flex; align-items: center; justify-content: center; text-align: center; flex-direction: column;
+            height: 40vh; background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url(media/room-with-lot-games-video-game-wall_875765-5370.jpg);
+            background-repeat: no-repeat; background-size: cover; background-position: center center;
+        }
+        #carrito-hero h1{ color: white; margin-bottom: 20px; font-family: 'Fredoka', sans-serif; }
+        #carrito-hero p{ font-family: 'Fredoka', sans-serif; }
+
+        #carrito-contenido{ padding: 100px 12px; background-color: white; }
+        #carrito-contenido h2{ text-align: center; margin-bottom: 50px; color: #333; font-family: 'Fredoka', sans-serif; }
+
+        .carrito-item{
+            display: flex; align-items: center; background-color: white; padding: 20px; 
+            margin-bottom: 15px; border-radius: 10px; border-left: 4px solid orangered;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        .item-imagen{ width: 100px; height: 100px; border-radius: 8px; object-fit: cover; margin-right: 20px; }
+        .item-info{ flex: 1; }
+        .item-info h3{ margin: 0 0 5px 0; font-family: 'Fredoka', sans-serif; }
+        .item-detalles{ color: #666; margin: 5px 0; font-family: 'Fredoka', sans-serif; }
+        .item-precio{ color: orangered; font-weight: bold; font-size: 1.2em; font-family: 'Fredoka', sans-serif; }
+        .cantidad-control{ display: flex; align-items: center; gap: 10px; margin-right: 20px; }
+        .cantidad-btn{ width: 30px; height: 30px; border-radius: 50%; background-color: #ddd; border: none; font-weight: bold; cursor: pointer; font-family: 'Fredoka', sans-serif; }
+        .eliminar-btn{ background-color: #ff3333; padding: 8px 15px; font-size: 0.9em; font-family: 'Fredoka', sans-serif; }
+
+        .carrito-vacio {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .carrito-vacio h3 {
+            font-size: 2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .carrito-vacio p {
+            color: #999;
+            margin-bottom: 30px;
+        }
+        .btn-seguir-comprando {
+            background-color: orangered;
+            padding: 15px 40px;
+            font-size: 1.2em;
+        }
+
+        .resumen{ background-color: #f5f5f5; padding: 25px; border-radius: 10px; margin-top: 30px; }
+        .resumen-linea{ display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ddd; font-family: 'Fredoka', sans-serif; }
+        .resumen-linea:last-child{ border-bottom: none; font-weight: bold; font-size: 1.2em; color: orangered; }
+
+        .puntos-ganar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #fff9e6, #fff3d6);
+            border-radius: 10px;
+            border: 1px solid #ffd966;
+            font-weight: bold;
+        }
+        
+        .puntos-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #b85e00;
+        }
+        
+        .puntos-icono {
+            font-size: 1.3em;
+        }
+        
+        .puntos-cantidad {
+            font-size: 1.3em;
+            color: #ff9800;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .cupon-section, .puntos-section { 
+            background: #f9f9f9; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin: 20px 0; 
+        }
+        .puntos-section { background: #fff3e0; border-left: 4px solid #ff9800; }
+        .cupon-section h3, .puntos-section h3 { 
+            font-family: 'Fredoka', sans-serif; 
+            margin-top: 0;
+        }
+        .cupon-input, .puntos-input { display: flex; gap: 10px; }
+        .cupon-input input, .puntos-input input { 
+            flex: 1; 
+            padding: 10px; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+            font-family: 'Fredoka', sans-serif;
+        }
+        .cupon-input input::placeholder, .puntos-input input::placeholder {
+            font-family: 'Fredoka', sans-serif;
+        }
+        .cupon-btn { background-color: #28a745; font-family: 'Fredoka', sans-serif; }
+        .puntos-btn { background-color: #ff9800; font-family: 'Fredoka', sans-serif; }
+        .cupon-mensaje, .puntos-mensaje { margin-top: 10px; font-size: 0.9em; font-family: 'Fredoka', sans-serif; }
+        .puntos-disponibles {
+            background: #fff; 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .puntos-valor {
+            color: #ff9800;
+            font-size: 1.2em;
+        }
+
+        footer{ background-color: rgb(230,230,230); }
+        footer p{ margin: 0; padding: 12px; color: rgb(100,100,100); font-family: 'Fredoka', sans-serif; }
+        footer .container{ height: 150px; justify-content: center; display: flex; align-items: flex-end; }
+
+        @media (min-width: 720px){
+            header{ position: fixed; width: 100%; }
+            header .container{ flex-direction: row; justify-content: space-between; }
+            header nav{ flex-direction: row; padding-bottom: 0; padding-right: 20px; }
+            #carrito-hero h1{ font-size: 4em; }
+        }
+        @media (max-width: 768px){
+            .carrito-item{ flex-wrap: wrap; }
+            .item-imagen{ width: 80px; height: 80px; margin-right: 15px; }
+            .puntos-disponibles { flex-direction: column; gap: 10px; text-align: center; }
+        }
+        
+        body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
+            font-family: 'Fredoka', sans-serif !important;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <p class="logo">XtremeGaming</p>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#VideojuegosMas">Videojuegos</a>
+            <a href="tarjetas.html">Tarjetas Regalo</a>
+            <a href="dispositivos.html">Dispositivos</a>
+            <a href="dlc.html">DLC</a>
+            <a href="index.html#caracteristicas">Sobre Nosotros</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="ajustes.html">Ajustes</a>
+            <a href="carrito.html" style="color: orangered;">Carrito</a>
+            <a href="sugerencias.html">Sugerencias</a>
+            <a href="actualizaciones.html">Registro de Cambios</a>
+        </nav>
+    </div>
+</header>
+
+<section id="carrito-hero">
+    <h1>Mi Carrito</h1>
+    <p style="color: white; font-size: 1.5em;">Revisa y completa tu compra</p>
+</section>
+
+<section id="carrito-contenido">
+    <div class="container">
+        <h2>Productos en el Carrito</h2>
+        
+        <div style="max-width: 1000px; margin: 0 auto;" id="carrito-container">
+            <div id="productos-container">
+                <div class="carrito-item" data-precio="59.99">
+                    <img src="media/cappydesktop.png" class="item-imagen">
+                    <div class="item-info">
+                        <h3>Super Mario Odyssey</h3>
+                        <p class="item-detalles">Platformer 3D - Nintendo Switch</p>
+                        <p class="item-precio">$<span class="precio-total-item">59.99</span></p>
+                    </div>
+                    <div class="cantidad-control">
+                        <button class="cantidad-btn menos">-</button>
+                        <span style="font-weight:bold" class="cantidad">1</span>
+                        <button class="cantidad-btn mas">+</button>
+                    </div>
+                    <button class="eliminar-btn">Eliminar</button>
+                </div>
+                
+                <div class="carrito-item" data-precio="59.99">
+                    <img src="media/battledesktop.png" class="item-imagen">
+                    <div class="item-info">
+                        <h3>Battlefield 6 - Standard Edition</h3>
+                        <p class="item-detalles">FPS - PC</p>
+                        <p class="item-precio">$<span class="precio-total-item">59.99</span></p>
+                    </div>
+                    <div class="cantidad-control">
+                        <button class="cantidad-btn menos">-</button>
+                        <span style="font-weight:bold" class="cantidad">1</span>
+                        <button class="cantidad-btn mas">+</button>
+                    </div>
+                    <button class="eliminar-btn">Eliminar</button>
+                </div>
+            </div>
+            
+            <div id="secciones-accion">
+                <div class="puntos-section">
+                    <h3>🎮 Canjear Puntos Xtreme</h3>
+                    <div class="puntos-disponibles">
+                        <span>Tus puntos disponibles:</span>
+                        <span class="puntos-valor" id="puntos-disponibles">1,250</span>
+                    </div>
+                    <div class="puntos-input">
+                        <input type="text" id="puntos" placeholder="Ej: 100, 200, 300... (máx 1000)" maxlength="4" onkeypress="return soloNumeros(event)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <button id="aplicar-puntos" class="puntos-btn">Canjear</button>
+                    </div>
+                    <div id="puntos-mensaje" class="puntos-mensaje"></div>
+                    <p style="font-size: 0.85em; color: #666; margin-top: 10px;">
+                        💡 100 puntos = $1 de descuento | Máximo 1000 puntos ($10).
+                        Por cada compra recibes puntos equivalentes al 10% del total (ej: $100 = 1,000 puntos)
+                    </p>
+                </div>
+                
+                <div class="cupon-section">
+                    <h3>Código de descuento [Limitado a 1 por compra]</h3>
+                    <div class="cupon-input">
+                        <input type="text" id="cupon" placeholder="Ingresa código">
+                        <button id="aplicar-cupon" class="cupon-btn">Aplicar</button>
+                    </div>
+                    <div id="cupon-mensaje" class="cupon-mensaje"></div>
+                </div>
+                
+                <div class="resumen">
+                    <div class="resumen-linea">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">$119.98</span>
+                    </div>
+                    <div class="resumen-linea" id="linea-descuento-puntos" style="display:none;">
+                        <span>Descuento puntos:</span>
+                        <span id="descuento-puntos">-$0.00</span>
+                    </div>
+                    <div class="resumen-linea" id="linea-descuento-cupon" style="display:none;">
+                        <span>Descuento cupón (<span id="cupon-porcentaje">10</span>%):</span>
+                        <span id="descuento-cupon">-$0.00</span>
+                    </div>
+                    <div class="resumen-linea">
+                        <span>Impuestos (10%):</span>
+                        <span id="impuestos">$12.00</span>
+                    </div>
+                    <div class="resumen-linea">
+                        <span>Envío:</span>
+                        <span>$0.00</span>
+                    </div>
+                    <div class="resumen-linea">
+                        <span>Total:</span>
+                        <span id="total">$131.98</span>
+                    </div>
+                    
+                    <div class="puntos-ganar" id="puntos-ganar">
+                        <span class="puntos-label">
+                            <span class="puntos-icono">⭐</span>
+                            <span>Puntos Xtreme que ganarás:</span>
+                        </span>
+                        <span class="puntos-cantidad" id="puntos-cantidad">1,320</span>
+                    </div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-top: 30px;">
+                    <button onclick="location.href='index.html#VideojuegosMas'">Seguir Comprando</button>
+                    <button id="btn-pagar" onclick="location.href='pago.html'" style="font-size: 1.2em; padding: 15px 40px;">Proceder al Pago</button>             
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; XtremeGaming 2026 - Carrito de Compras</p>
+    </div>
+</footer>
+
+<script>
+    function soloNumeros(e) {
+        const charCode = (e.which) ? e.which : e.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
+    let cuponUsado = false;
+    let descuentoPorcentaje = 0;
+    let codigoAplicado = "";
+    
+    const codigosValidos = {
+        "PRUEBA1": 50,
+        "PRUEBA2": 25,
+        "PRUEBA3": 10
+    };
+    
+    const codigosCaducados = ["PRUEBA4", "X2PUNTOS"];
+    
+    let puntosDisponibles = 1250;
+    let puntosCanjeados = 0;
+    let puntosActivos = false;
+    
+    function isCarritoVacio() {
+        return document.querySelectorAll('.carrito-item').length === 0;
+    }
+    
+    function actualizarEstadoBotones() {
+        const vacio = isCarritoVacio();
+        const puntosBtn = document.getElementById('aplicar-puntos');
+        const cuponBtn = document.getElementById('aplicar-cupon');
+        const pagarBtn = document.getElementById('btn-pagar');
+        const puntosInput = document.getElementById('puntos');
+        const cuponInput = document.getElementById('cupon');
+        
+        if (vacio) {
+            if (puntosBtn) puntosBtn.disabled = true;
+            if (cuponBtn) cuponBtn.disabled = true;
+            if (pagarBtn) pagarBtn.disabled = true;
+            if (puntosInput) puntosInput.disabled = true;
+            if (cuponInput) cuponInput.disabled = true;
+            
+            if (!document.getElementById('carrito-vacio-msg')) {
+                const productosContainer = document.getElementById('productos-container');
+                const carritoVacioHTML = `
+                    <div id="carrito-vacio-msg" class="carrito-vacio">
+                        <h3>🛒 Tu carrito está vacío</h3>
+                        <p>Parece que aún no has añadido ningún producto.</p>
+                        <button class="btn-seguir-comprando" onclick="location.href='index.html#VideojuegosMas'">Seguir Comprando</button>
+                    </div>
+                `;
+                if (productosContainer) {
+                    productosContainer.innerHTML = carritoVacioHTML;
+                }
+            }
+        } else {
+            if (puntosBtn && !puntosActivos) puntosBtn.disabled = false;
+            if (cuponBtn && !cuponUsado) cuponBtn.disabled = false;
+            if (pagarBtn) pagarBtn.disabled = false;
+            if (puntosInput && !puntosActivos) puntosInput.disabled = false;
+            if (cuponInput && !cuponUsado) cuponInput.disabled = false;
+        }
+    }
+    
+    function actualizarPuntosAGanar() {
+        const totalElement = document.getElementById('total');
+        const puntosCantidad = document.getElementById('puntos-cantidad');
+        
+        if (totalElement && puntosCantidad) {
+            const totalTexto = totalElement.textContent;
+            const totalNumero = parseFloat(totalTexto.replace('$', ''));
+            const puntos = Math.round(totalNumero * 10);
+            puntosCantidad.textContent = puntos.toLocaleString();
+        }
+    }
+    
+    function actualizarPrecioItem(item) {
+        const precioUnitario = parseFloat(item.getAttribute('data-precio'));
+        const cantidad = parseInt(item.querySelector('.cantidad').textContent);
+        const precioTotalItem = precioUnitario * cantidad;
+        
+        item.querySelector('.precio-total-item').textContent = precioTotalItem.toFixed(2);
+    }
+    
+    function calcularTotal() {
+        let subtotal = 0;
+        
+        document.querySelectorAll('.carrito-item').forEach(item => {
+            const precioUnitario = parseFloat(item.getAttribute('data-precio'));
+            const cantidad = parseInt(item.querySelector('.cantidad').textContent);
+            const precioItem = precioUnitario * cantidad;
+            subtotal += precioItem;
+            
+            actualizarPrecioItem(item);
+        });
+        
+        let descuentoPuntosMonto = 0;
+        if (puntosActivos) {
+            descuentoPuntosMonto = puntosCanjeados * 0.01;
+        }
+        
+        let subtotalConPuntos = subtotal - descuentoPuntosMonto;
+        let descuentoCuponMonto = 0;
+        if (descuentoPorcentaje > 0) {
+            descuentoCuponMonto = subtotalConPuntos * (descuentoPorcentaje / 100);
+        }
+        
+        const subtotalConDescuentos = subtotalConPuntos - descuentoCuponMonto;
+        const impuestos = subtotalConDescuentos * 0.10;
+        const total = subtotalConDescuentos + impuestos;
+        
+        document.getElementById('subtotal').textContent = "$" + subtotal.toFixed(2);
+        
+        if (descuentoPuntosMonto > 0) {
+            document.getElementById('linea-descuento-puntos').style.display = "flex";
+            document.getElementById('descuento-puntos').textContent = "-$" + descuentoPuntosMonto.toFixed(2);
+        } else {
+            document.getElementById('linea-descuento-puntos').style.display = "none";
+        }
+        
+        if (descuentoCuponMonto > 0) {
+            document.getElementById('linea-descuento-cupon').style.display = "flex";
+            document.getElementById('descuento-cupon').textContent = "-$" + descuentoCuponMonto.toFixed(2);
+            document.getElementById('cupon-porcentaje').textContent = descuentoPorcentaje;
+        } else {
+            document.getElementById('linea-descuento-cupon').style.display = "none";
+        }
+        
+        document.getElementById('impuestos').textContent = "$" + impuestos.toFixed(2);
+        document.getElementById('total').textContent = "$" + total.toFixed(2);
+        
+        document.getElementById('puntos-disponibles').textContent = puntosDisponibles.toLocaleString();
+        
+        actualizarPuntosAGanar();
+        actualizarEstadoBotones();
+    }
+    
+    document.querySelectorAll('.cantidad-btn').forEach(boton => {
+        boton.onclick = function() {
+            const item = this.closest('.carrito-item');
+            const cantidadSpan = item.querySelector('.cantidad');
+            let valor = parseInt(cantidadSpan.textContent);
+            
+            if(this.classList.contains('mas')){
+                cantidadSpan.textContent = valor + 1;
+            } else if(this.classList.contains('menos') && valor > 1){
+                cantidadSpan.textContent = valor - 1;
+            }
+            
+            calcularTotal();
+        };
+    });
+    
+    document.querySelectorAll('.eliminar-btn').forEach(boton => {
+        boton.onclick = function() {
+            const item = this.closest('.carrito-item');
+            item.remove();
+            calcularTotal();
+        };
+    });
+    
+    document.getElementById('aplicar-cupon').onclick = function() {
+        if (isCarritoVacio()) {
+            document.getElementById('cupon-mensaje').textContent = "❌ No puedes aplicar cupones cuando el carrito está vacío";
+            document.getElementById('cupon-mensaje').style.color = "red";
+            return;
+        }
+        
+        const cupon = document.getElementById('cupon').value.toUpperCase();
+        const mensaje = document.getElementById('cupon-mensaje');
+        
+        if (cuponUsado) {
+            mensaje.textContent = "Ya usaste un cupón";
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        if (codigosCaducados.includes(cupon)) {
+            mensaje.textContent = "❌ Este código ha caducado y ya no está disponible";
+            mensaje.style.color = "orange";
+            return;
+        }
+        
+        if (codigosValidos.hasOwnProperty(cupon)) {
+            descuentoPorcentaje = codigosValidos[cupon];
+            cuponUsado = true;
+            codigoAplicado = cupon;
+            
+            calcularTotal();
+            
+            document.getElementById('cupon').disabled = true;
+            this.disabled = true;
+            this.textContent = "Aplicado";
+            this.style.backgroundColor = "#666";
+            
+            mensaje.textContent = `¡Cupón aplicado! ${descuentoPorcentaje}% de descuento`;
+            mensaje.style.color = "green";
+        } else {
+            mensaje.textContent = "Código no válido";
+            mensaje.style.color = "red";
+        }
+    };
+    
+    document.getElementById('aplicar-puntos').onclick = function() {
+        if (isCarritoVacio()) {
+            document.getElementById('puntos-mensaje').textContent = "❌ No puedes canjear puntos cuando el carrito está vacío";
+            document.getElementById('puntos-mensaje').style.color = "red";
+            return;
+        }
+        
+        const puntosInput = document.getElementById('puntos');
+        const puntos = parseInt(puntosInput.value);
+        const mensaje = document.getElementById('puntos-mensaje');
+        
+        if (isNaN(puntos) || puntos <= 0) {
+            mensaje.textContent = "Por favor, ingresa un número válido de puntos";
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        if (puntos % 100 !== 0) {
+            mensaje.textContent = "❌ Solo puedes canjear puntos de 100 en 100 (100, 200, 300...)";
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        if (puntos > 1000) {
+            mensaje.textContent = "❌ El máximo de puntos que puedes canjear es 1000 ($10)";
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        if (puntos > puntosDisponibles) {
+            mensaje.textContent = `❌ No tienes suficientes puntos. Disponibles: ${puntosDisponibles}`;
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        if (puntosActivos) {
+            mensaje.textContent = "Ya has canjeado puntos en esta compra. Solo puedes usar puntos una vez.";
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        puntosCanjeados = puntos;
+        puntosActivos = true;
+        puntosDisponibles -= puntos;
+        
+        puntosInput.disabled = true;
+        this.disabled = true;
+        this.textContent = "Canjeado";
+        this.style.backgroundColor = "#666";
+        
+        mensaje.textContent = `✅ ¡Has canjeado ${puntos} puntos! Descuento de $${(puntos * 0.01).toFixed(2)}`;
+        mensaje.style.color = "green";
+        
+        calcularTotal();
+    };
+    
+    document.getElementById('btn-pagar').addEventListener('click', function(e) {
+        if (isCarritoVacio()) {
+            e.preventDefault();
+            alert('❌ No puedes proceder al pago porque tu carrito está vacío');
+            return false;
+        }
+    });
+    
+    calcularTotal();
+</script>
+
+</body>
+</html>
