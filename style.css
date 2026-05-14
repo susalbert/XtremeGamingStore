@@ -1347,6 +1347,24 @@ header a:hover{
         url(media/finalfantasyvii.png);
 }
 
+.carta:nth-child(199){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/uncharted3.webp);
+}
+
+.carta:nth-child(200){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/uncharted4.jpg);
+}
+
+.carta:nth-child(201){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/forza6.png);
+}
+
 
 #caracteristicas .container{
     text-align: center;
