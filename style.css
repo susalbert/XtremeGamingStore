@@ -1383,6 +1383,12 @@ header a:hover{
         url(media/yoshi2.webp);
 }
 
+.carta:nth-child(205){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/tomodachi.webp);
+}
+
 
 #caracteristicas .container{
     text-align: center;
