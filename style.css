@@ -1365,6 +1365,24 @@ header a:hover{
         url(media/forza6.png);
 }
 
+.carta:nth-child(202){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/arms.jpg);
+}
+
+.carta:nth-child(203){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/subnautica2.webp);
+}
+
+.carta:nth-child(204){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/yoshi2.webp);
+}
+
 
 #caracteristicas .container{
     text-align: center;
