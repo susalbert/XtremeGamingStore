@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Próximamente - XtremeGaming</title>
+    <title>Dispositivos - XtremeGaming</title>
     <link rel="icon" href="media/icono.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* AÑADE ESTO PRIMERO */
-        body {
-            padding-top: 80px; /* COMPENSA el header fixed */
-            margin: 0;
-            font-family: 'Fredoka', sans-serif;
+        * {
+            box-sizing: border-box;
+            font-family: 'Fredoka', sans-serif !important;
         }
         
-        *{
-            box-sizing: border-box;
-        }
-
-        html{
+        html {
             scroll-behavior: smooth;
         }
-
-        h1{ font-size: 3.5em; font-family: 'Fredoka', sans-serif;}
-        h2{ font-size: 2.7em; font-family: 'Fredoka', sans-serif;}
-        h3{ font-size: 2em; font-family: 'Fredoka', sans-serif;}
-        p{ font-size: 1.25em; font-family: 'Fredoka', sans-serif;}
-        ul{ list-style: none;}
-        li{ font-size: 1.25em; font-family: 'Fredoka', sans-serif;}
-
-        button{
-            font-size: 1.5em;
+        
+        body {
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.7em; }
+        h3 { font-size: 2em; }
+        p { font-size: 1.25em; }
+        
+        button {
+            font-size: 1em;
             font-weight: bold;
-            padding: 10px 30px;
+            padding: 10px 20px;
             border-radius: 10px;
             border: 1px solid rgba(0,0,0,0.5);
             box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
@@ -41,146 +39,304 @@
             cursor: pointer;
             font-family: 'Fredoka', sans-serif;
         }
-
-        button:hover{
+        
+        button:hover {
             background-color: rgba(255, 72, 0, 0.8);
         }
-
-        .container{
+        
+        .container {
             max-width: 1400px;
             margin: auto;
+            padding: 0 20px;
         }
 
-        .color-acento{ color:orangered; }
-
-        /* HEADER FIXED CORRECTO */
-        header{
+        header {
             background-color: rgb(245,245,245);
+            width: 100%;
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
             z-index: 1000;
-            width: 100%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        header .logo{
+        
+        header .logo {
             margin: 0;
             padding: 25px 30px;
             font-weight: bold;
             color: orangered;
             font-size: 1.6em;
-            font-family: 'Fredoka', sans-serif;
         }
-
-        header .container{
+        
+        header .container {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
-        header nav{
+        
+        header nav {
             display: flex;
             flex-direction: column;
             text-align: center;
             padding-bottom: 25px;
         }
-
-        header a{
+        
+        header a {
             padding: 5px 12px;
             text-decoration: none;
             font-weight: bold;
             color: black;
-            font-family: 'Fredoka', sans-serif;
         }
-
-        header a:hover{
+        
+        header a:hover {
             color: orangered;
         }
 
-        #proximamente-hero{
+        #dispositivos-hero {
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             flex-direction: column;
-            height: 60vh;
-            background-image: linear-gradient(
-                0deg,
-                rgba(0,0,0,0.7),
-                rgba(0,0,0,0.7)
-            ),
-            url(media/room-with-lot-games-video-game-wall_875765-5370.jpg);
+            height: 40vh;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+            url('media/room-with-lot-games-video-game-wall_875765-5370.jpg');
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center center;
-            margin-top: 0; /* Asegúrate que sea 0 */
+            padding-top: 100px;
+            margin-top: 80px;
         }
-
-        #proximamente-hero h1{
+        
+        #dispositivos-hero h1 {
             color: white;
             margin-bottom: 20px;
-            font-family: 'Fredoka', sans-serif;
+        }
+        
+        #dispositivos-hero p {
+            color: white;
+            font-size: 1.5em;
         }
 
-        #proximamente-hero p{
-            font-family: 'Fredoka', sans-serif;
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 30px;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            display: flex;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        .search-box button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        .search-box button:hover {
+            background-color: #45a049;
         }
 
-        .icono-proximamente {
-            font-size: 4em;
-            margin-bottom: 20px;
+        .filtros-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .filtro-titulo {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: white; 
+            background-color: #333; 
+            padding: 10px 20px; 
+            border-radius: 25px; 
+            white-space: nowrap;
+        }
+        
+        .filtros-categoria {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filtro-btn {
+            padding: 10px 20px;
+            background-color: orangered;
+            border: 2px solid orangered;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            font-family: 'Fredoka', sans-serif !important;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .filtro-btn:hover {
+            background-color: #ff6600;
+            border-color: #e65c00;
+        }
+        
+        .filtro-btn.active {
+            background-color: #cc5200;
+            border-color: #cc5200;
+            box-shadow: 0 4px 8px rgba(204, 82, 0, 0.3);
         }
 
-        .mensaje-proximamente {
-            background-color: #f5f5f5;
-            padding: 40px;
-            border-radius: 15px;
-            max-width: 800px;
-            margin: 50px auto;
-            border-left: 5px solid orangered;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        .no-results {
             text-align: center;
+            padding: 40px;
+            font-style: italic;
+            color: #666;
+            display: none;
+        }
+        
+        .no-results.show {
+            display: block;
+        }
+        
+        .dispositivo-hidden {
+            display: none !important;
         }
 
-        footer{
+        .categoria-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: #666;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 5px;
+            font-weight: bold;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        .badge-cascos { background-color: #9c27b0; }
+        .badge-portatiles { background-color: #1976d2; }
+        .badge-ratones { background-color: #f57c00; }
+
+        .dispositivos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .carta {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 300px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .carta:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dispositivo-imagen {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+        }
+
+        .puntos-ganados {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 12px;
+            padding: 4px 8px;
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #ff9800;
+            font-weight: bold;
+            border: 1px solid #ff9800;
+        }
+        
+        .puntos-icono {
+            font-size: 0.9em;
+        }
+        
+        .puntos-cantidad {
+            color: #e65100;
+        }
+
+        footer {
             background-color: rgb(230,230,230);
+            padding: 12px 0;
+            margin-top: 60px;
         }
-
-        footer p{
+        
+        footer p {
             margin: 0;
             padding: 12px;
             color: rgb(100,100,100);
-            font-family: 'Fredoka', sans-serif;
+            text-align: center;
         }
-
-        footer .container{
-            height: 150px;
-            justify-content: center;
+        
+        footer .container {
             display: flex;
-            align-items: flex-end;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
         }
 
-        @media (min-width: 720px){
-            header .container{
+        @media (min-width: 720px) {
+            header .container {
                 flex-direction: row;
                 justify-content: space-between;
             }
-
-            header nav{
+            
+            header nav {
                 flex-direction: row;
                 padding-bottom: 0;
                 padding-right: 20px;
             }
-
-            #proximamente-hero h1{
+            
+            #dispositivos-hero h1 {
                 font-size: 4em;
             }
-        }
-        
-        body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
-            font-family: 'Fredoka', sans-serif !important;
+            
+            #dispositivos-hero {
+                margin-top: 0;
+            }
         }
     </style>
 </head>
@@ -205,32 +361,243 @@
     </div>
 </header>
 
-<section id="proximamente-hero">
-    <div class="icono-proximamente">🚧</div>
-    <h1>Próximamente</h1>
-    <p style="color: white; font-size: 1.5em;">Esta página está en construcción</p>
+<section id="dispositivos-hero">
+    <h1>🖥️ Dispositivos y Periféricos</h1>
+    <p>Equípate con el mejor hardware para tus partidas</p>
 </section>
 
-<section style="padding: 100px 12px; background-color: white;">
+<section id="dispositivos-contenido" style="padding: 50px 12px;">
     <div class="container">
-        <div class="mensaje-proximamente">
-            <h2>¡Estamos trabajando en esto!</h2>
-            <p>Esta sección de nuestra tienda estará disponible muy pronto. Estamos preparando algo increíble para ti.</p>
-            <p>Mientras tanto, puedes explorar nuestras otras secciones o contactarnos si necesitas ayuda.</p>
-            
-            <div style="margin-top: 40px;">
-                <button onclick="location.href='index.html'">Volver al Inicio</button>
-                <button onclick="location.href='sugerencias.html'" style="margin-left: 20px; background-color: #666;">Enviar Sugerencia</button>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar dispositivo...">
+                <button id="searchButton">Buscar</button>
             </div>
         </div>
+        
+        <div class="filtros-container">
+            <div class="filtro-titulo">
+                Filtrar por categoría:
+            </div>
+            <div class="filtros-categoria">
+                <button class="filtro-btn active" data-categoria="todos">Todos</button>
+                <button class="filtro-btn" data-categoria="cascos">Cascos</button>
+                <button class="filtro-btn" data-categoria="portatiles">Portátiles</button>
+                <button class="filtro-btn" data-categoria="ratones">Ratones</button>
+            </div>
+        </div>
+        
+        <h2>Dispositivos Disponibles</h2>
+        
+        <div class="no-results" id="noResultsMessage">
+            No se encontraron dispositivos que coincidan con tu búsqueda.
+        </div>
+
+        <div class="dispositivos-grid" id="dispositivos-grid">
+            
+            <div class="carta dispositivo-card" data-name="Cascos HyperX Cloud II" data-categorias="cascos" data-precio="89.99">
+                <img src="media/cascos_hyperx.png" alt="HyperX Cloud II" class="dispositivo-imagen" onerror="this.src='https://via.placeholder.com/300x200?text=HyperX+Cloud+II'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Cascos HyperX Cloud II
+                    <span class="categoria-badge badge-cascos">Cascos</span>
+                </h3>
+                <p style="font-size: 0.95em;">Sonido envolvente 7.1 virtual y micrófono con cancelación de ruido.</p>
+                <button onclick="addToCartSimple('Cascos HyperX Cloud II', 89.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">900</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dispositivo-card" data-name="Cascos Logitech G Pro X" data-categorias="cascos" data-precio="119.99">
+                <img src="media/cascos_logitech.png" alt="Logitech G Pro X" class="dispositivo-imagen" onerror="this.src='https://via.placeholder.com/300x200?text=Logitech+G+Pro+X'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Cascos Logitech G Pro X
+                    <span class="categoria-badge badge-cascos">Cascos</span>
+                </h3>
+                <p style="font-size: 0.95em;">Diseñados para esports, con tecnología Blue VO!CE para el micrófono.</p>
+                <button onclick="addToCartSimple('Cascos Logitech G Pro X', 119.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">1200</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dispositivo-card" data-name="Portátil ASUS ROG Strix G16" data-categorias="portatiles" data-precio="1499.00">
+                <img src="media/portatil_asus.png" alt="ASUS ROG Strix G16" class="dispositivo-imagen" onerror="this.src='https://via.placeholder.com/300x200?text=ASUS+ROG+Strix'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Portátil ASUS ROG Strix G16
+                    <span class="categoria-badge badge-portatiles">Portátiles</span>
+                </h3>
+                <p style="font-size: 0.95em;">Intel Core i7, RTX 4060, 16GB RAM y pantalla de 165Hz.</p>
+                <button onclick="addToCartSimple('Portátil ASUS ROG Strix G16', 1499.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">15000</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta dispositivo-card" data-name="Ratón Logitech G502 HERO" data-categorias="ratones" data-precio="49.99">
+                <img src="media/raton_logitech.png" alt="Logitech G502 HERO" class="dispositivo-imagen" onerror="this.src='https://via.placeholder.com/300x200?text=Logitech+G502'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Ratón Logitech G502 HERO
+                    <span class="categoria-badge badge-ratones">Ratones</span>
+                </h3>
+                <p style="font-size: 0.95em;">Sensor HERO 25K de alta precisión y 11 botones programables.</p>
+                <button onclick="addToCartSimple('Ratón Logitech G502 HERO', 49.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">500</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+        </div>
+        
     </div>
 </section>
 
 <footer>
     <div class="container">
-        <p>&copy; XtremeGaming 2026 - Dispositivos</p>
+        <p>&copy; XtremeGaming 2026 - Dispositivos y Periféricos</p>
     </div>
 </footer>
+
+<script>
+    let categoriasSeleccionadas = ['todos'];
+    
+    function addToCartSimple(nombre, precio) {
+        const producto = {
+            nombre: nombre,
+            precio: precio,
+            cantidad: 1
+        };
+        
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        alert(`✓ Añadido: ${nombre} ($${precio})`);
+        
+        if (confirm('¿Ir al carrito?')) {
+            window.location.href = 'carrito.html';
+        }
+    }
+    
+    function toggleCategoria(categoria, btnElement) {
+        const btnTodos = document.querySelector('[data-categoria="todos"]');
+        
+        if (categoria === 'todos') {
+            document.querySelectorAll('.filtro-btn').forEach(btn => {
+                if (btn.getAttribute('data-categoria') !== 'todos') {
+                    btn.classList.remove('active');
+                }
+            });
+            btnTodos.classList.add('active');
+            categoriasSeleccionadas = ['todos'];
+        } 
+        else {
+            if (categoriasSeleccionadas.includes('todos')) {
+                btnTodos.classList.remove('active');
+                categoriasSeleccionadas = categoriasSeleccionadas.filter(c => c !== 'todos');
+            }
+            
+            const index = categoriasSeleccionadas.indexOf(categoria);
+            if (index === -1) {
+                categoriasSeleccionadas.push(categoria);
+                btnElement.classList.add('active');
+            } else {
+                categoriasSeleccionadas.splice(index, 1);
+                btnElement.classList.remove('active');
+            }
+            
+            if (categoriasSeleccionadas.length === 0) {
+                btnTodos.classList.add('active');
+                categoriasSeleccionadas = ['todos'];
+            }
+        }
+        
+        aplicarFiltros();
+    }
+    
+    function aplicarFiltros() {
+        const dispositivos = document.querySelectorAll('.dispositivo-card');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+        let visibleCount = 0;
+        
+        if (categoriasSeleccionadas.includes('todos')) {
+            dispositivos.forEach(dispositivo => {
+                const dispositivoName = dispositivo.getAttribute('data-name').toLowerCase();
+                const matchesSearch = searchTerm === '' || dispositivoName.includes(searchTerm);
+                
+                if (matchesSearch) {
+                    dispositivo.classList.remove('dispositivo-hidden');
+                    visibleCount++;
+                } else {
+                    dispositivo.classList.add('dispositivo-hidden');
+                }
+            });
+        } 
+        else {
+            dispositivos.forEach(dispositivo => {
+                const dispositivoName = dispositivo.getAttribute('data-name').toLowerCase();
+                const dispositivoCategorias = dispositivo.getAttribute('data-categorias').split(',');
+                
+                const matchesCategoria = categoriasSeleccionadas.some(categoria => 
+                    dispositivoCategorias.includes(categoria)
+                );
+                
+                const matchesSearch = searchTerm === '' || dispositivoName.includes(searchTerm);
+                
+                if (matchesCategoria && matchesSearch) {
+                    dispositivo.classList.remove('dispositivo-hidden');
+                    visibleCount++;
+                } else {
+                    dispositivo.classList.add('dispositivo-hidden');
+                }
+            });
+        }
+        
+        if (visibleCount === 0) {
+            noResultsMessage.classList.add('show');
+        } else {
+            noResultsMessage.classList.remove('show');
+        }
+        
+        if (searchTerm !== '') {
+            setTimeout(() => {
+                document.getElementById('dispositivos-contenido').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+    }
+    
+    document.getElementById('searchButton').addEventListener('click', function() {
+        aplicarFiltros();
+    });
+    
+    document.getElementById('searchInput').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            aplicarFiltros();
+        }
+    });
+    
+    document.getElementById('searchInput').addEventListener('input', function() {
+        if (this.value === '') {
+            aplicarFiltros();
+        }
+    });
+    
+    document.querySelectorAll('.filtro-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const categoria = this.getAttribute('data-categoria');
+            toggleCategoria(categoria, this);
+        });
+    });
+    
+    window.addEventListener('load', function() {
+        aplicarFiltros();
+    });
+</script>
 
 </body>
 </html>
