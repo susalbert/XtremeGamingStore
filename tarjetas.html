@@ -6,7 +6,6 @@
     <title>Tarjetas Regalo - XtremeGaming</title>
     <link rel="icon" href="media/icono.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -91,142 +90,213 @@
             color: orangered;
         }
 
-        .aviso-container {
-            background-color: #fff9e6;
-            border: 2px solid #ff7b00;
-            border-radius: 15px;
-            padding: 30px;
-            max-width: 900px;
-            width: 100%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin: 180px auto 50px auto;
-        }
-
-        .aviso-titulo {
-            color: #e65100;
-            font-size: 1.8em;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .aviso-texto {
-            color: #333;
-            font-size: 1.1em;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
-
-        .aviso-texto strong {
-            font-weight: 600;
-        }
-
-        .info-row {
+        #tarjetas-hero {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
-            font-size: 1.1em;
-            color: #333;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            height: 40vh;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+            url('media/room-with-lot-games-video-game-wall_875765-5370.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            padding-top: 100px;
+            margin-top: 80px;
+        }
+        
+        #tarjetas-hero h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        #tarjetas-hero p {
+            color: white;
+            font-size: 1.5em;
         }
 
-        .info-icono {
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0 30px;
+            padding: 0 20px;
+        }
+        
+        .search-box {
+            display: flex;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        .search-box button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        .search-box button:hover {
+            background-color: #45a049;
+        }
+
+        .filtros-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .filtro-titulo {
             font-size: 1.2em;
-            margin-right: 10px;
+            font-weight: bold;
+            color: white; 
+            background-color: #333; 
+            padding: 10px 20px; 
+            border-radius: 25px; 
+            white-space: nowrap;
+        }
+        
+        .filtros-region {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .filtro-btn {
+            padding: 10px 20px;
+            background-color: orangered;
+            border: 2px solid orangered;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+            font-family: 'Fredoka', sans-serif !important;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .filtro-btn:hover {
+            background-color: #ff6600;
+            border-color: #e65c00;
+        }
+        
+        .filtro-btn.active {
+            background-color: #cc5200;
+            border-color: #cc5200;
+            box-shadow: 0 4px 8px rgba(204, 82, 0, 0.3);
         }
 
-        .info-pais {
-            font-weight: 700;
-            margin-right: 5px;
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            font-style: italic;
+            color: #666;
+            display: none;
         }
+        
+        .no-results.show {
+            display: block;
+        }
+        
+        .tarjeta-hidden {
+            display: none !important;
+        }
+
+        .region-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            background-color: #666;
+            color: white;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 5px;
+            font-weight: bold;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        .badge-global { background-color: #2e7d32; }
+        .badge-espana { background-color: #c2185b; }
 
         .tarjetas-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 25px;
             justify-content: center;
+            gap: 20px;
         }
-
-        .tarjeta-item {
-            background-color: #ffffff;
-            border-radius: 12px;
-            padding: 15px 10px;
-            width: calc(16.666% - 15px);
-            min-width: 110px;
+        
+        .carta {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 300px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            transition: transform 0.2s;
+            justify-content: space-between;
+        }
+        
+        .carta:hover {
+            transform: translateY(-5px);
+        }
+        
+        .tarjeta-imagen {
+            width: 100%;
+            height: 150px;
+            object-fit: contain;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+            padding: 10px;
         }
 
-        .tarjeta-item:hover {
-            transform: translateY(-3px);
-        }
-
-        .tarjeta-icono {
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            height: 40px;
+        .puntos-ganados {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 5px;
+            margin-top: 12px;
+            padding: 4px 8px;
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #ff9800;
+            font-weight: bold;
+            border: 1px solid #ff9800;
         }
-
-        .tarjeta-icono img {
-            max-height: 35px;
-            max-width: 45px;
-            object-fit: contain;
+        
+        .puntos-icono {
+            font-size: 0.9em;
         }
-
-        .tarjeta-nombre {
-            font-weight: 600;
-            font-size: 0.95em;
-            color: #333;
-            margin-bottom: 4px;
-        }
-
-        .tarjeta-etiqueta {
-            font-size: 0.75em;
-            font-weight: 500;
-        }
-
-        .tarjeta-global {
-            border: 1px solid #a8e6cf;
-        }
-        .tarjeta-global .tarjeta-etiqueta {
-            color: #2e7d32;
-        }
-
-        .tarjeta-global-naranja {
-            border: 1px solid #ffcc80;
-        }
-        .tarjeta-global-naranja .tarjeta-etiqueta {
+        
+        .puntos-cantidad {
             color: #e65100;
         }
-
-        .tarjeta-espana {
-            border: 1px solid #f8bbd0;
-        }
-        .tarjeta-espana .tarjeta-etiqueta {
-            color: #c2185b;
-        }
-
-        .tarjeta-especial .tarjeta-icono {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #666;
-            height: auto;
-            margin-bottom: 5px;
-        }
-
-        .icono-nintendo { color: #e60012; }
-        .icono-play { color: #0066cc; }
-        .icono-xbox { color: #107c10; }
-        .icono-fortnite { color: #9d4edd; }
-        .icono-roblox { color: #e63946; }
-        .icono-steam { color: #666666; }
-        .icono-minecraft { color: #8b5a2b; }
 
         footer {
             background-color: rgb(230,230,230);
@@ -260,25 +330,13 @@
                 padding-right: 20px;
             }
             
-            .aviso-container {
-                margin-top: 100px;
+            #tarjetas-hero h1 {
+                font-size: 4em;
             }
-        }
-
-        @media (max-width: 768px) {
-            .tarjeta-item {
-                width: calc(25% - 15px);
+            
+            #tarjetas-hero {
+                margin-top: 0;
             }
-            .aviso-titulo { font-size: 1.5em; }
-            .aviso-texto { font-size: 1em; }
-        }
-
-        @media (max-width: 480px) {
-            .tarjeta-item {
-                width: calc(33.333% - 15px);
-            }
-            .info-row { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .info-icono { display: none; }
         }
     </style>
 </head>
@@ -303,100 +361,344 @@
     </div>
 </header>
 
-<div class="container">
-    <div class="aviso-container">
-        <h2 class="aviso-titulo">¡Las tarjetas regalo llegan a XtremeGaming!</h2>
+<section id="tarjetas-hero">
+    <h1>💳 Tarjetas Regalo</h1>
+    <p>Recarga tu saldo digital al instante y sin comisiones</p>
+</section>
+
+<section id="tarjetas-contenido" style="padding: 50px 12px;">
+    <div class="container">
         
-        <p class="aviso-texto">
-            Muy pronto (no hay fecha confirmada aun) estrenaremos nuestra nueva sección de <strong>Tarjetas Regalo</strong>. Podrás adquirir saldo digital para tus plataformas favoritas de forma rápida y segura. Todas las tarjetas se envían en formato digital a tu correo electrónico.
-        </p>
-
-        <div class="info-row">
-            <span class="info-icono">🌍</span>
-            <span><strong>Tarjetas Globales:</strong> Disponibles para cualquier país.</span>
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar tarjeta...">
+                <button id="searchButton">Buscar</button>
+            </div>
         </div>
-        <div class="info-row">
-            <span class="info-pais">ES</span>
-            <span><strong>Tarjetas exclusivas para España:</strong> Solo disponibles para clientes en España.</span>
+        
+        <div class="filtros-container">
+            <div class="filtro-titulo">
+                Filtrar por región:
+            </div>
+            <div class="filtros-region">
+                <button class="filtro-btn active" data-region="todos">Todas</button>
+                <button class="filtro-btn" data-region="global">Globales</button>
+                <button class="filtro-btn" data-region="espana">España</button>
+            </div>
+        </div>
+        
+        <h2>Tarjetas Disponibles</h2>
+        
+        <div class="no-results" id="noResultsMessage">
+            No se encontraron tarjetas que coincidan con tu búsqueda.
         </div>
 
-        <div class="tarjetas-grid">
+        <div class="tarjetas-grid" id="tarjetas-grid">
             
-            <div class="tarjeta-item tarjeta-global">
-                <div class="tarjeta-icono"><i class="fa-solid fa-gamepad icono-nintendo"></i></div>
-                <div class="tarjeta-nombre">Nintendo eShop</div>
-                <div class="tarjeta-etiqueta">Global</div>
+            <!-- Nintendo -->
+            <div class="carta tarjeta-card" data-name="Nintendo eShop" data-region="global" data-precio="15.00">
+                <img src="media/nintendo.png" alt="Nintendo eShop" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Nintendo+eShop'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Nintendo eShop
+                    <span class="region-badge badge-global">Global</span>
+                </h3>
+                <p style="font-size: 0.95em;">Saldo digital para la eShop de Nintendo</p>
+                <button onclick="addToCartSimple('Tarjeta Nintendo eShop', 15.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">150</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-global">
-                <div class="tarjeta-icono"><i class="fa-brands fa-playstation icono-play"></i></div>
-                <div class="tarjeta-nombre">PlayStation</div>
-                <div class="tarjeta-etiqueta">Global</div>
+            <!-- PlayStation -->
+            <div class="carta tarjeta-card" data-name="PlayStation Store" data-region="global" data-precio="20.00">
+                <img src="media/playstation.png" alt="PlayStation Store" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=PlayStation+Store'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">PlayStation Store
+                    <span class="region-badge badge-global">Global</span>
+                </h3>
+                <p style="font-size: 0.95em;">Saldo para juegos y suscripciones en PS</p>
+                <button onclick="addToCartSimple('Tarjeta PlayStation Store', 20.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">200</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-global">
-                <div class="tarjeta-icono"><i class="fa-brands fa-xbox icono-xbox"></i></div>
-                <div class="tarjeta-nombre">Xbox</div>
-                <div class="tarjeta-etiqueta">Global</div>
+            <!-- Xbox -->
+            <div class="carta tarjeta-card" data-name="Xbox Gift Card" data-region="global" data-precio="25.00">
+                <img src="media/xbox.png" alt="Xbox Gift Card" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Xbox+Gift+Card'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Xbox Gift Card
+                    <span class="region-badge badge-global">Global</span>
+                </h3>
+                <p style="font-size: 0.95em;">Saldo para la Microsoft Store y Game Pass</p>
+                <button onclick="addToCartSimple('Tarjeta Xbox', 25.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">250</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-global-naranja">
-                <div class="tarjeta-icono"><i class="fa-solid fa-gun icono-fortnite"></i></div>
-                <div class="tarjeta-nombre">Fortnite</div>
-                <div class="tarjeta-etiqueta">Global</div>
+            <!-- Fortnite -->
+            <div class="carta tarjeta-card" data-name="Fortnite V-Bucks" data-region="global" data-precio="10.00">
+                <img src="media/fortnite.png" alt="Fortnite V-Bucks" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Fortnite+V-Bucks'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Fortnite V-Bucks
+                    <span class="region-badge badge-global">Global</span>
+                </h3>
+                <p style="font-size: 0.95em;">1000 V-Bucks para la tienda de Fortnite</p>
+                <button onclick="addToCartSimple('Tarjeta Fortnite 1000 V-Bucks', 10.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">100</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-global-naranja">
-                <div class="tarjeta-icono"><i class="fa-solid fa-robot icono-roblox"></i></div>
-                <div class="tarjeta-nombre">Roblox</div>
-                <div class="tarjeta-etiqueta">Global</div>
+            <!-- Roblox -->
+            <div class="carta tarjeta-card" data-name="Roblox Robux" data-region="global" data-precio="10.00">
+                <img src="media/roblox.png" alt="Roblox Robux" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Roblox+Robux'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Roblox Robux
+                    <span class="region-badge badge-global">Global</span>
+                </h3>
+                <p style="font-size: 0.95em;">800 Robux para gastar en la tienda de Roblox</p>
+                <button onclick="addToCartSimple('Tarjeta Roblox 800 Robux', 10.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">100</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-global-naranja">
-                <div class="tarjeta-icono"><i class="fa-brands fa-steam icono-steam"></i></div>
-                <div class="tarjeta-nombre">Steam</div>
-                <div class="tarjeta-etiqueta">Global</div>
+            <!-- Steam -->
+            <div class="carta tarjeta-card" data-name="Steam Wallet" data-region="global" data-precio="20.00">
+                <img src="media/steam.png" alt="Steam Wallet" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Steam+Wallet'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Steam Wallet
+                    <span class="region-badge badge-global">Global</span>
+                </h3>
+                <p style="font-size: 0.95em;">Saldo para comprar juegos en Steam</p>
+                <button onclick="addToCartSimple('Tarjeta Steam Wallet', 20.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">200</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-global-naranja">
-                <div class="tarjeta-icono"><i class="fa-solid fa-hammer icono-minecraft"></i></div>
-                <div class="tarjeta-nombre">Minecraft Minecoins</div>
-                <div class="tarjeta-etiqueta">Global</div>
+            <!-- Minecraft -->
+            <div class="carta tarjeta-card" data-name="Minecraft Minecoins" data-region="global" data-precio="10.00">
+                <img src="media/minecraft.png" alt="Minecraft Minecoins" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Minecraft+Minecoins'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Minecraft Minecoins
+                    <span class="region-badge badge-global">Global</span>
+                </h3>
+                <p style="font-size: 0.95em;">1720 Minecoins para el Marketplace</p>
+                <button onclick="addToCartSimple('Tarjeta Minecraft Minecoins', 10.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">100</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-espana tarjeta-especial">
-                <div class="tarjeta-icono">ES</div>
-                <div class="tarjeta-nombre">Google Play</div>
-                <div class="tarjeta-etiqueta">España</div>
+            <!-- Google Play (España) -->
+            <div class="carta tarjeta-card" data-name="Google Play" data-region="espana" data-precio="15.00">
+                <img src="media/googleplay.png" alt="Google Play" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Google+Play'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Google Play
+                    <span class="region-badge badge-espana">España</span>
+                </h3>
+                <p style="font-size: 0.95em;">Saldo para apps y juegos en Android</p>
+                <button onclick="addToCartSimple('Tarjeta Google Play', 15.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">150</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-espana tarjeta-especial">
-                <div class="tarjeta-icono">ES</div>
-                <div class="tarjeta-nombre">Amazon</div>
-                <div class="tarjeta-etiqueta">España</div>
+            <!-- Amazon (España) -->
+            <div class="carta tarjeta-card" data-name="Amazon" data-region="espana" data-precio="25.00">
+                <img src="media/amazon.png" alt="Amazon" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Amazon'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Amazon
+                    <span class="region-badge badge-espana">España</span>
+                </h3>
+                <p style="font-size: 0.95em;">Tarjeta regalo para comprar en Amazon.es</p>
+                <button onclick="addToCartSimple('Tarjeta Amazon', 25.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">250</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-espana tarjeta-especial">
-                <div class="tarjeta-icono">ES</div>
-                <div class="tarjeta-nombre">Paysafecard</div>
-                <div class="tarjeta-etiqueta">España</div>
+            <!-- Paysafecard (España) -->
+            <div class="carta tarjeta-card" data-name="Paysafecard" data-region="espana" data-precio="10.00">
+                <img src="media/paysafecard.png" alt="Paysafecard" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=Paysafecard'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Paysafecard
+                    <span class="region-badge badge-espana">España</span>
+                </h3>
+                <p style="font-size: 0.95em;">Código prepago para pagos online seguros</p>
+                <button onclick="addToCartSimple('Tarjeta Paysafecard', 10.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">100</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="tarjeta-item tarjeta-espana tarjeta-especial">
-                <div class="tarjeta-icono">ES</div>
-                <div class="tarjeta-nombre">PayPal</div>
-                <div class="tarjeta-etiqueta">España</div>
+            <!-- PayPal (España) -->
+            <div class="carta tarjeta-card" data-name="PayPal" data-region="espana" data-precio="20.00">
+                <img src="media/paypal.png" alt="PayPal" class="tarjeta-imagen" onerror="this.src='https://via.placeholder.com/300x150?text=PayPal'">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">PayPal
+                    <span class="region-badge badge-espana">España</span>
+                </h3>
+                <p style="font-size: 0.95em;">Recarga tu saldo de PayPal fácilmente</p>
+                <button onclick="addToCartSimple('Tarjeta PayPal', 20.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">200</span> Puntos Xtreme</span>
+                </div>
             </div>
 
         </div>
+        
     </div>
-</div>
+</section>
 
 <footer>
     <div class="container">
         <p>&copy; XtremeGaming 2026 - Tarjetas Regalo</p>
     </div>
 </footer>
+
+<script>
+    let regionesSeleccionadas = ['todos'];
+    
+    function addToCartSimple(nombre, precio) {
+        const producto = {
+            nombre: nombre,
+            precio: precio,
+            cantidad: 1
+        };
+        
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        alert(`✓ Añadido: ${nombre} ($${precio})`);
+        
+        if (confirm('¿Ir al carrito?')) {
+            window.location.href = 'carrito.html';
+        }
+    }
+    
+    function toggleRegion(region, btnElement) {
+        const btnTodos = document.querySelector('[data-region="todos"]');
+        
+        if (region === 'todos') {
+            document.querySelectorAll('.filtro-btn').forEach(btn => {
+                if (btn.getAttribute('data-region') !== 'todos') {
+                    btn.classList.remove('active');
+                }
+            });
+            btnTodos.classList.add('active');
+            regionesSeleccionadas = ['todos'];
+        } 
+        else {
+            if (regionesSeleccionadas.includes('todos')) {
+                btnTodos.classList.remove('active');
+                regionesSeleccionadas = regionesSeleccionadas.filter(r => r !== 'todos');
+            }
+            
+            const index = regionesSeleccionadas.indexOf(region);
+            if (index === -1) {
+                regionesSeleccionadas.push(region);
+                btnElement.classList.add('active');
+            } else {
+                regionesSeleccionadas.splice(index, 1);
+                btnElement.classList.remove('active');
+            }
+            
+            if (regionesSeleccionadas.length === 0) {
+                btnTodos.classList.add('active');
+                regionesSeleccionadas = ['todos'];
+            }
+        }
+        
+        aplicarFiltros();
+    }
+    
+    function aplicarFiltros() {
+        const tarjetas = document.querySelectorAll('.tarjeta-card');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+        let visibleCount = 0;
+        
+        if (regionesSeleccionadas.includes('todos')) {
+            tarjetas.forEach(tarjeta => {
+                const tarjetaName = tarjeta.getAttribute('data-name').toLowerCase();
+                const matchesSearch = searchTerm === '' || tarjetaName.includes(searchTerm);
+                
+                if (matchesSearch) {
+                    tarjeta.classList.remove('tarjeta-hidden');
+                    visibleCount++;
+                } else {
+                    tarjeta.classList.add('tarjeta-hidden');
+                }
+            });
+        } 
+        else {
+            tarjetas.forEach(tarjeta => {
+                const tarjetaName = tarjeta.getAttribute('data-name').toLowerCase();
+                const tarjetaRegiones = tarjeta.getAttribute('data-region').split(',');
+                
+                const matchesRegion = regionesSeleccionadas.some(region => 
+                    tarjetaRegiones.includes(region)
+                );
+                
+                const matchesSearch = searchTerm === '' || tarjetaName.includes(searchTerm);
+                
+                if (matchesRegion && matchesSearch) {
+                    tarjeta.classList.remove('tarjeta-hidden');
+                    visibleCount++;
+                } else {
+                    tarjeta.classList.add('tarjeta-hidden');
+                }
+            });
+        }
+        
+        if (visibleCount === 0) {
+            noResultsMessage.classList.add('show');
+        } else {
+            noResultsMessage.classList.remove('show');
+        }
+        
+        if (searchTerm !== '') {
+            setTimeout(() => {
+                document.getElementById('tarjetas-contenido').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }, 100);
+        }
+    }
+    
+    document.getElementById('searchButton').addEventListener('click', function() {
+        aplicarFiltros();
+    });
+    
+    document.getElementById('searchInput').addEventListener('keyup', function(event) {
+        if (event.key === 'Enter') {
+            aplicarFiltros();
+        }
+    });
+    
+    document.getElementById('searchInput').addEventListener('input', function() {
+        if (this.value === '') {
+            aplicarFiltros();
+        }
+    });
+    
+    document.querySelectorAll('.filtro-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const region = this.getAttribute('data-region');
+            toggleRegion(region, this);
+        });
+    });
+    
+    window.addEventListener('load', function() {
+        aplicarFiltros();
+    });
+</script>
 
 </body>
 </html>
